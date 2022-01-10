@@ -4,9 +4,9 @@ import androidx.annotation.Nullable;
 
 import java.util.List;
 
-import de.fhswf.stnau001.surveysandbox.api.OnFailureListener;
-import de.fhswf.stnau001.surveysandbox.api.OnSuccessListener;
-import de.fhswf.stnau001.surveysandbox.model.Survey;
+import de.fhswf.moa.surveys.api.OnFailureListener;
+import de.fhswf.moa.surveys.api.OnSuccessListener;
+import de.fhswf.moa.surveys.model.Survey;
 
 /**
  * Service definition for fetching the list of available surveys (overview).

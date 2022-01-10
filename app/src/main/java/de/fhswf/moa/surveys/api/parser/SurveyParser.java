@@ -4,7 +4,7 @@ import androidx.annotation.NonNull;
 
 import org.json.JSONObject;
 
-import de.fhswf.stnau001.surveysandbox.model.Survey;
+import de.fhswf.moa.surveys.model.Survey;
 
 /**
  * Parser for surveys.

@@ -6,7 +6,9 @@ import androidx.annotation.Nullable;
 import java.util.Objects;
 
 /**
- * The base-model for any question object.
+ * Basis-Model für alle Frage-Klassen.
+ * <p>
+ * Enthält einige rudimentäre Felder, über welche alle Fragen verfügen.
  */
 public abstract class Question {
 
@@ -18,14 +20,16 @@ public abstract class Question {
     private String description;
 
     /**
-     * The total number of users who responded to this individual question.
+     * Die Anzahl von Nutzern, welche insgesamt auf diese Frage geantwortet haben.
+     * <p>
+     * (Verwendet in der Ergebnis-Präsentation.)
      */
     private int respondents;
 
     /**
-     * The question's type, as defined in {@link QuestionType}.
+     * Frage-Typ (definiert in {@link QuestionType}).
      *
-     * @return The question's type; must not be null.
+     * @return Frage-Typ; darf nicht null sein.
      */
     @NonNull
     public abstract QuestionType getType();

@@ -10,16 +10,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.fhswf.stnau001.surveysandbox.model.InfoQuestion;
-import de.fhswf.stnau001.surveysandbox.model.InputQuestion;
-import de.fhswf.stnau001.surveysandbox.model.MultiSelectQuestion;
-import de.fhswf.stnau001.surveysandbox.model.Question;
-import de.fhswf.stnau001.surveysandbox.model.QuestionType;
-import de.fhswf.stnau001.surveysandbox.model.RatingQuestion;
-import de.fhswf.stnau001.surveysandbox.model.SingleSelectQuestion;
+import de.fhswf.moa.surveys.model.Question;
+import de.fhswf.moa.surveys.model.InfoQuestion;
+import de.fhswf.moa.surveys.model.InputQuestion;
+import de.fhswf.moa.surveys.model.MultiSelectQuestion;
+import de.fhswf.moa.surveys.model.QuestionType;
+import de.fhswf.moa.surveys.model.RatingQuestion;
+import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 
 /**
- * Parser for single questions.
+ * Parser für einzelne Fragen.
  */
 public class QuestionParser implements ResponseParser<Question> {
 
@@ -38,7 +38,7 @@ public class QuestionParser implements ResponseParser<Question> {
                     // Info questions don't have any additional fields
                     break;
                 case INPUT:
-                    question =  fillInputQuestion(data);
+                    question = fillInputQuestion(data);
                     break;
                 case SINGLE_SELECT:
                     question = fillSingleSelectQuestion(data);
@@ -100,7 +100,7 @@ public class QuestionParser implements ResponseParser<Question> {
         ArrayList<String> options = new ArrayList<>(array.length());
 
         for (int i = 0; i < array.length(); i++) {
-            if(!options.contains(array.getString(i))) {
+            if (!options.contains(array.getString(i))) {
                 options.add(array.getString(i));
             }
         }
@@ -108,8 +108,8 @@ public class QuestionParser implements ResponseParser<Question> {
         question.setOptions(options);
 
         // Optional Map of results
-        if(data.has("results")) {
-            array = data.getJSONArray( "results");
+        if (data.has("results")) {
+            array = data.getJSONArray("results");
             Map<String, Integer> results = new HashMap<>(array.length());
 
             for (int i = 0; i < array.length(); i++) {
@@ -133,7 +133,7 @@ public class QuestionParser implements ResponseParser<Question> {
         ArrayList<String> options = new ArrayList<>(array.length());
 
         for (int i = 0; i < array.length(); i++) {
-            if(!options.contains(array.getString(i))) {
+            if (!options.contains(array.getString(i))) {
                 options.add(array.getString(i));
             }
         }
@@ -141,8 +141,8 @@ public class QuestionParser implements ResponseParser<Question> {
         question.setOptions(options);
 
         // Optional Map of results
-        if(data.has("results")) {
-            array = data.getJSONArray( "results");
+        if (data.has("results")) {
+            array = data.getJSONArray("results");
             Map<String, Integer> results = new HashMap<>(array.length());
 
             for (int i = 0; i < array.length(); i++) {
@@ -162,8 +162,8 @@ public class QuestionParser implements ResponseParser<Question> {
         RatingQuestion question = new RatingQuestion();
 
         // Optional Map of results
-        if(data.has("results")) {
-            JSONArray array = data.getJSONArray( "results");
+        if (data.has("results")) {
+            JSONArray array = data.getJSONArray("results");
             Map<Integer, Integer> results = new HashMap<>(array.length());
 
             for (int i = 0; i < array.length(); i++) {

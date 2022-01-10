@@ -6,10 +6,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * A question that offers a list of options of which the user can pick exactly one.
- *
- * This question type's responses are stored in a map that stores the number of times an option was
- * chosen for each response.
+ * Question-Typ für Fragen, die dem Nutzer eine Liste von Optionen präsentiert und eine einzelne
+ * Auswahl erlaubt.
+ * <p>
+ * Die Ergebnisse für diesen Frage-Typen werden in einer {@link Map} abgelegt, welche den
+ * jeweiligen Optionen (String, key) der Anzahl der Nutzer zuordnet, welche dies Option
+ * ausgewählt haben (Integer, value).
  */
 public class SingleSelectQuestion extends Question {
     public static final QuestionType QUESTION_TYPE = QuestionType.SINGLE_SELECT;

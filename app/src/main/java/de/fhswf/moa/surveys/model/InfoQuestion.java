@@ -3,13 +3,13 @@ package de.fhswf.moa.surveys.model;
 import androidx.annotation.NonNull;
 
 /**
- * This question type semantically isn't an actual question, but rather provides a simple
- * way to display additional information.
- *
- * This can be, for instance, used to introduce a survey and provide some context, or as a tool
- * to separate more complex surveys by adding an info-card before each section.
- *
- * Info-cards currently do not require any additional fields.
+ * Dieser Question-Typ steht nicht für eine tatsächliche Frage, sondern dient viel eher als
+ * einfache Möglichkeit, dem Nutzer zusätzliche Informationen zur Verfügung zu stellen.
+ * <p>
+ * Dies könnte z.B. genutzt werden, um eine Umfrage einzuleiten und einen Kontext zu etablieren,
+ * oder aber um komplexere Umfragen durch Info-Karten in Abschnitte zu unterteilen.
+ * <p>
+ * Info-Karten erfordern aktuell keine zusätzlichen Felder.
  */
 public class InfoQuestion extends Question {
     public static final QuestionType QUESTION_TYPE = QuestionType.INFO;

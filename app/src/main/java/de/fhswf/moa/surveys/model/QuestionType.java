@@ -1,10 +1,10 @@
 package de.fhswf.moa.surveys.model;
 
 /**
- * Defines possible types of questions as an enumerable.
- *
- * The QuestionsType's value describe the identifier that is used for (de)serialization and all
- * other API communication.
+ * Definiert mögliche Frage-Typen als Enumerable.
+ * <p>
+ * Das value-Feld beschreibt den Identifier des jeweiligen Typen als String, so wie er in der
+ * Kommunikation mit der API verwendet wird.
  */
 public enum QuestionType {
     INFO("INFO"),
@@ -20,15 +20,15 @@ public enum QuestionType {
     }
 
     /**
-     * Parse any string as a question type.
+     * Interpretiere einen String als Frage-Typen.
      *
-     * @param type Question type as String.
-     * @return Corresponding field of QuestionType.
-     * @throws RuntimeException In case the given type doesn't match any of the fields.
+     * @param type String-Darstellung eines Frage-Typen.
+     * @return Entsprechendes QuestionType Feld.
+     * @throws RuntimeException Geworfen, wenn der String zu keinem Feld passt.
      */
     public static QuestionType parse(String type) {
-        for(QuestionType c : values()) {
-            if(c.getValue().equals(type))
+        for (QuestionType c : values()) {
+            if (c.getValue().equals(type))
                 return c;
         }
 

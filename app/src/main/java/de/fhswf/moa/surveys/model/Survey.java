@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 /**
- * Data-model for a survey.
+ * Daten-Modell für eine Survey.
  */
 public class Survey {
 

@@ -10,13 +10,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.fhswf.stnau001.surveysandbox.model.InfoQuestion;
-import de.fhswf.stnau001.surveysandbox.model.InputQuestion;
-import de.fhswf.stnau001.surveysandbox.model.MultiSelectQuestion;
-import de.fhswf.stnau001.surveysandbox.model.Question;
-import de.fhswf.stnau001.surveysandbox.model.QuestionType;
-import de.fhswf.stnau001.surveysandbox.model.RatingQuestion;
-import de.fhswf.stnau001.surveysandbox.model.SingleSelectQuestion;
+import de.fhswf.moa.surveys.model.InfoQuestion;
+import de.fhswf.moa.surveys.model.InputQuestion;
+import de.fhswf.moa.surveys.model.MultiSelectQuestion;
+import de.fhswf.moa.surveys.model.Question;
+import de.fhswf.moa.surveys.model.QuestionType;
+import de.fhswf.moa.surveys.model.RatingQuestion;
+import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 
 /**
  * Parser for single questions.

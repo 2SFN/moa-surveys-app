@@ -1,0 +1,23 @@
+package de.fhswf.moa.surveys.list.item;
+
+import de.fhswf.moa.surveys.model.MultiSelectQuestion;
+import de.fhswf.moa.surveys.model.RatingQuestion;
+
+public class RatingQuestionListItem implements ListItem{
+    public static final int TYPE = 2;
+
+    private RatingQuestion question;
+
+    public RatingQuestionListItem(RatingQuestion question) {
+        this.question = question;
+    }
+
+    public RatingQuestion getQuestion() {
+        return question;
+    }
+
+    @Override
+    public int getType() {
+        return TYPE;
+    }
+}

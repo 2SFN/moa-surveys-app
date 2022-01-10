@@ -2,6 +2,7 @@ package de.fhswf.moa.surveys.model;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,11 @@ public class SingleSelectQuestion extends Question {
 
     private Map<String, Integer> results;
 
-    // TODO: Add useful constructors
+    public SingleSelectQuestion() {
+
+    }
+
+// TODO: Add useful constructors
     // TODO: Add simple helper-methods for lists/maps (utility class?)
 
     public List<String> getOptions() {
@@ -27,6 +32,15 @@ public class SingleSelectQuestion extends Question {
 
     public void setOptions(List<String> options) {
         this.options = options;
+    }
+
+    public Question addOption(String option) {
+        if(this.options == null)
+            this.options = new ArrayList<>();
+
+        options.add(option);
+
+        return this;
     }
 
     public Map<String, Integer> getResults() {

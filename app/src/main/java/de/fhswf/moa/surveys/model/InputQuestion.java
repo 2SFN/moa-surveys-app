@@ -22,11 +22,22 @@ public class InputQuestion extends Question {
     @Nullable
     private List<String> results;
 
+    public InputQuestion() {
+    }
+
+    public InputQuestion(String id, String title, @Nullable String description, int maxLength) {
+        super(id, title, description);
+        setMaxLength(maxLength);
+    }
+
     public int getMaxLength() {
         return maxLength;
     }
 
     public void setMaxLength(int maxLength) {
+        if(maxLength < 1)
+            throw new IllegalArgumentException("Maximum length must be positive and non-zero.");
+
         this.maxLength = maxLength;
     }
 

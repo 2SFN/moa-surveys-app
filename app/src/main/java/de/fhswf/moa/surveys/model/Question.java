@@ -26,6 +26,15 @@ public abstract class Question {
      */
     private int respondents;
 
+    public Question() {
+    }
+
+    public Question(String id, String title, @Nullable String description) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+
     /**
      * Frage-Typ (definiert in {@link QuestionType}).
      *

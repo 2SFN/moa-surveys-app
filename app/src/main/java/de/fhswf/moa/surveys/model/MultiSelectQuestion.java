@@ -24,7 +24,14 @@ public class MultiSelectQuestion extends SingleSelectQuestion {
 
     private int maxSelectedOptions = DEFAULT_MAX_SELECTION;
 
-    // TODO: Add useful constructor(s)
+    public MultiSelectQuestion() {
+    }
+
+    public MultiSelectQuestion(String id, String title, String description,
+                               int maxSelectedOptions) {
+        super(id, title, description);
+        this.maxSelectedOptions = maxSelectedOptions;
+    }
 
     public int getMaxSelectedOptions() {
         return maxSelectedOptions;

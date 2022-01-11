@@ -1,8 +1,10 @@
 package de.fhswf.moa.surveys.model;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Daten-Modell für eine Survey.
@@ -16,7 +18,7 @@ public class Survey {
     private String description;
 
     @Nullable
-    private ArrayList<Question> questions;
+    private List<Question> questions;
 
     public Survey() {
     }
@@ -25,6 +27,14 @@ public class Survey {
         this.id = id;
         this.title = title;
         this.description = description;
+    }
+
+    public Survey(String id, String title, String description,
+                  @Nullable List<Question> questions) {
+        this.id = id;
+        this.title = title;
+        this.description = description;
+        this.questions = questions;
     }
 
     public String getId() {
@@ -52,11 +62,26 @@ public class Survey {
     }
 
     @Nullable
-    public ArrayList<Question> getQuestions() {
+    public List<Question> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(@Nullable ArrayList<Question> questions) {
+    public void setQuestions(@Nullable List<Question> questions) {
         this.questions = questions;
+    }
+
+    /**
+     * Einfache Helfer-Methode, um die Fragen der Survey zu füllen.
+     *
+     * @param question Frage zum Hinzufügen.
+     */
+    public Survey addQuestion(@NonNull Question question) {
+        if (this.questions == null)
+            this.questions = new ArrayList<>();
+
+        if(!questions.contains(question))
+            questions.add(question);
+
+        return this;
     }
 }

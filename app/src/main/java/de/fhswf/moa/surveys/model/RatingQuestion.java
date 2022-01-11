@@ -1,6 +1,7 @@
 package de.fhswf.moa.surveys.model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Map;
 
@@ -16,7 +17,12 @@ public class RatingQuestion extends Question {
 
     private Map<Integer, Integer> results;
 
-    // TODO: Add useful constructor(s)
+    public RatingQuestion() {
+    }
+
+    public RatingQuestion(String id, String title, @Nullable String description) {
+        super(id, title, description);
+    }
 
     public Map<Integer, Integer> getResults() {
         return results;

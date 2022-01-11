@@ -1,7 +1,9 @@
 package de.fhswf.moa.surveys.model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +22,11 @@ public class SingleSelectQuestion extends Question {
 
     private Map<String, Integer> results;
 
-    // TODO: Add useful constructors
-    // TODO: Add simple helper-methods for lists/maps (utility class?)
+    public SingleSelectQuestion() {}
+
+    public SingleSelectQuestion(String id, String title, @Nullable String description) {
+        super(id, title, description);
+    }
 
     public List<String> getOptions() {
         return options;
@@ -37,6 +42,21 @@ public class SingleSelectQuestion extends Question {
 
     public void setResults(Map<String, Integer> results) {
         this.results = results;
+    }
+
+    /**
+     * Einfacher Weg, um einer Frage schnell einige Antwort-Optionen hinzuzufügen.
+     *
+     * @param option Text für die neue Option.
+     */
+    public SingleSelectQuestion addOption(@NonNull String option) {
+        if(this.options == null)
+            this.options = new ArrayList<>();
+
+        if(!options.contains(option))
+            options.add(option);
+
+        return this;
     }
 
     @NonNull

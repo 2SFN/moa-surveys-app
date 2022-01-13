@@ -1,21 +1,28 @@
 package de.fhswf.moa.surveys.model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Map;
 
 /**
- * A question that allows the user to enter a rating between one and five stars, points, etc.
- *
- * The results are stored in a map that associates the rating (Integer, key) to the number of
- * users who chose the rating (Integer, value).
+ * Question-Typ für Fragen, die es dem Nutzer erlauben, eine Bewertung zwischen 1 und 6 Sternen
+ * abzugeben.
+ * <p>
+ * Die Ergebnisse dieser Fragen werden in einer {@link Map} abgelegt, die jeder Bewertung
+ * (Integer, key) die Anzahl der Nutzer, die diese Option gewählt haben (Integer, value) zuordnet.
  */
 public class RatingQuestion extends Question {
     public static final QuestionType QUESTION_TYPE = QuestionType.RATING;
 
     private Map<Integer, Integer> results;
 
-    // TODO: Add useful constructor(s)
+    public RatingQuestion() {
+    }
+
+    public RatingQuestion(String id, String title, @Nullable String description) {
+        super(id, title, description);
+    }
 
     public Map<Integer, Integer> getResults() {
         return results;

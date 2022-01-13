@@ -4,17 +4,17 @@ import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 
 /**
- * A simple interface that is used for negative service callbacks.
+ * Einfaches Interface, das für negative Service-Callbacks genutzt wird.
  *
- * Note that the caller of the interface method should always make sure to post the execution
- * back on the main thread.
+ * (Es sollte immer sichergestellt werden, dass der Aufruf der {@link this#onFailure(Throwable)}
+ * Methode immer im Main-Thread stattfindet.)
  */
 public interface OnFailureListener {
 
     /**
-     * Called when an error occurred while processing the service request.
+     * Wird aufgerufen, wenn während der Service-Anfrage ein Fehler aufgetreten ist.
      *
-     * @param e Error cause with additional data.
+     * @param e Fehlerursache mit zusätzlichen Informationen.
      */
     @MainThread
     void onFailure(@NonNull Throwable e);

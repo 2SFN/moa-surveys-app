@@ -3,18 +3,18 @@ package de.fhswf.moa.surveys.model;
 import androidx.annotation.NonNull;
 
 /**
- * A question that's very similar to {@link SingleSelectQuestion}, but allows the user to select
- * multiple options.
- *
- * There's an option to set a maximum number of options that the user can select simultaneously.
- * By default, there's no limit in place.
+ * Question-Typ, der sehr ähnlich zu der {@link SingleSelectQuestion} ist. Allerdings kann der
+ * Nutzer hier mehrere Optionen gleichzeitig auswählen.
+ * <p>
+ * Es ist möglich, eine maximale Anzahl von gleichzeitig auswählbaren Optionen festzulegen.
+ * Standardmäßig gibt es keine Beschränkung.
  */
 public class MultiSelectQuestion extends SingleSelectQuestion {
     public static final QuestionType QUESTION_TYPE = QuestionType.MULTI_SELECT;
 
     /**
-     * A constant for {@link this#maxSelectedOptions} that is used as a value when there's
-     * no selection limit in place (ie. the user can select as many options as they like).
+     * Eine Konstante für {@link this#maxSelectedOptions}, welche eingesetzt wird, wenn es keine
+     * Auswahl-Beschränkung für diese Frage geben soll.
      */
     public static final int NO_SELECTION_LIMIT = 0;
 
@@ -24,7 +24,14 @@ public class MultiSelectQuestion extends SingleSelectQuestion {
 
     private int maxSelectedOptions = DEFAULT_MAX_SELECTION;
 
-    // TODO: Add useful constructor(s)
+    public MultiSelectQuestion() {
+    }
+
+    public MultiSelectQuestion(String id, String title, String description,
+                               int maxSelectedOptions) {
+        super(id, title, description);
+        this.maxSelectedOptions = maxSelectedOptions;
+    }
 
     public int getMaxSelectedOptions() {
         return maxSelectedOptions;

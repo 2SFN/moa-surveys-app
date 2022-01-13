@@ -5,19 +5,19 @@ import androidx.annotation.NonNull;
 import org.json.JSONObject;
 
 /**
- * An interface that describes a simple response-parser that deserializes the given JSON-formatted
- * data to the corresponding object type.
+ * Ein Interface, das einen einfachen Response-Parser beschreibt, welcher gegebene Daten im
+ * JSON-Format interpretiert und in den geforderten Typen überführt.
  *
- * @param <T> Resulting object type.
+ * @param <T> Ergebnis Objekt-Typ.
  */
-public interface ResponseParser <T> {
+public interface ResponseParser<T> {
 
     /**
-     * Parse the JSON-data into an instance of the target class.
+     * Verarbeite die JSON-Daten zu einer Instanz der Ziel-Objekt-Klasse.
      *
-     * @param data Source data.
-     * @return Target object instance.
-     * @throws ParsingException In case there's an error while parsing the data.
+     * @param data Quelldaten.
+     * @return Instanz der Ergebnis-Klasse.
+     * @throws ParsingException Geworfen, wenn beim Verarbeiten ein Fehler auftritt.
      */
     @NonNull
     T parse(@NonNull JSONObject data) throws ParsingException;

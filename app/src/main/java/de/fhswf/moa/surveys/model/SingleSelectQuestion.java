@@ -1,16 +1,19 @@
 package de.fhswf.moa.surveys.model;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
- * A question that offers a list of options of which the user can pick exactly one.
- *
- * This question type's responses are stored in a map that stores the number of times an option was
- * chosen for each response.
+ * Question-Typ für Fragen, die dem Nutzer eine Liste von Optionen präsentiert und eine einzelne
+ * Auswahl erlaubt.
+ * <p>
+ * Die Ergebnisse für diesen Frage-Typen werden in einer {@link Map} abgelegt, welche den
+ * jeweiligen Optionen (String, key) der Anzahl der Nutzer zuordnet, welche dies Option
+ * ausgewählt haben (Integer, value).
  */
 public class SingleSelectQuestion extends Question {
     public static final QuestionType QUESTION_TYPE = QuestionType.SINGLE_SELECT;
@@ -19,12 +22,11 @@ public class SingleSelectQuestion extends Question {
 
     private Map<String, Integer> results;
 
-    public SingleSelectQuestion() {
+    public SingleSelectQuestion() {}
 
+    public SingleSelectQuestion(String id, String title, @Nullable String description) {
+        super(id, title, description);
     }
-
-// TODO: Add useful constructors
-    // TODO: Add simple helper-methods for lists/maps (utility class?)
 
     public List<String> getOptions() {
         return options;
@@ -49,6 +51,21 @@ public class SingleSelectQuestion extends Question {
 
     public void setResults(Map<String, Integer> results) {
         this.results = results;
+    }
+
+    /**
+     * Einfacher Weg, um einer Frage schnell einige Antwort-Optionen hinzuzufügen.
+     *
+     * @param option Text für die neue Option.
+     */
+    public SingleSelectQuestion addOption(@NonNull String option) {
+        if(this.options == null)
+            this.options = new ArrayList<>();
+
+        if(!options.contains(option))
+            options.add(option);
+
+        return this;
     }
 
     @NonNull

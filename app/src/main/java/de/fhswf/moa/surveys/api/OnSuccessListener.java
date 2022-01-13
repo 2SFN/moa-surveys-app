@@ -3,19 +3,20 @@ package de.fhswf.moa.surveys.api;
 import androidx.annotation.MainThread;
 
 /**
- * A simple interface that is used for positive service callbacks with a result-object.
+ * Einfaches Interface, das für positive Service-Callbacks genutzt wird und ein Ergebnis-Objekt
+ * enthält.
+ * <p>
+ * (Es sollte immer sichergestellt werden, dass der Aufruf der {@link this#onSuccess(Object)}
+ * Methode immer im Main-Thread stattfindet.)
  *
- * Note that the caller of the interface method should always make sure to post the result back
- * to the main thread.
- *
- * @param <T> Type of the result-object.
+ * @param <T> Typ des Ergebnis-Objekts.
  */
-public interface OnSuccessListener <T> {
+public interface OnSuccessListener<T> {
 
     /**
-     * Called when the request was successfully executed.
+     * Wird aufgerufen, wenn die Service-Anfrage erfolgreich ausgeführt wurde.
      *
-     * @param result The result-object of the request.
+     * @param result Das Ergebnis-Objekt der Anfrage.
      */
     @MainThread
     void onSuccess(T result);

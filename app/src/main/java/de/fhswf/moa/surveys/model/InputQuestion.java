@@ -6,11 +6,12 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 /**
- * A question that allows the user to freely input any text as a response.
- *
- * This question type's responses are represented as a list of strings.
- *
- * The maximum length of the user's response can be configured.
+ * Question-Typ, welcher es dem Nutzer erlaubt, einen Freitext als Antwort einzugeben.
+ * <p>
+ * Die Ergebnisse dieser Fragen werden als Liste von Strings repräsentiert.
+ * <p>
+ * Dieser Typ erlaubt es, die maximale Anzahl von Zeichen, die der Nutzer eingeben kann,
+ * zu beschränken.
  */
 public class InputQuestion extends Question {
     public static final QuestionType QUESTION_TYPE = QuestionType.INPUT;
@@ -21,11 +22,22 @@ public class InputQuestion extends Question {
     @Nullable
     private List<String> results;
 
+    public InputQuestion() {
+    }
+
+    public InputQuestion(String id, String title, @Nullable String description, int maxLength) {
+        super(id, title, description);
+        setMaxLength(maxLength);
+    }
+
     public int getMaxLength() {
         return maxLength;
     }
 
     public void setMaxLength(int maxLength) {
+        if(maxLength < 1)
+            throw new IllegalArgumentException("Maximum length must be positive and non-zero.");
+
         this.maxLength = maxLength;
     }
 

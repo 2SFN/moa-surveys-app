@@ -1,9 +1,9 @@
 package de.fhswf.moa.surveys.api.parser;
 
 /**
- * Exception that can be used when parsing an object's details failed.
- *
- * For instance, it can be used when a required field is not provided.
+ * Exception, die geworfen werden kann, wenn das Parsen einer Antwort fehlschlägt.
+ * <p>
+ * Dies kann z.B. eingesetzt werden, wenn ein erforderliches Feld fehlt.
  */
 public class ParsingException extends Exception {
 

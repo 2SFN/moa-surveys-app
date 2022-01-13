@@ -3,7 +3,7 @@ package de.fhswf.moa.surveys.api.service;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.util.List;
 
@@ -40,11 +40,11 @@ public interface SurveyService {
      * Sende die Nutzer-Antworten zu einer Survey.
      *
      * @param id                ID der beantworteten Survey.
-     * @param body              Antwort-Daten als JSON-Objekt(e).
+     * @param responses         Antwort-Daten als JSON-Objekt(e).
      * @param onSuccessListener Erfolg-Callback, leerer Ergebnis-Typ.
      * @param onFailureListener Fehler-Callback.
      */
-    void submitResponses(@NonNull String id, @NonNull JSONObject body,
+    void submitResponses(@NonNull String id, @NonNull JSONArray responses,
                          @Nullable OnSuccessListener<Void> onSuccessListener,
                          @Nullable OnFailureListener onFailureListener);
 

@@ -6,7 +6,7 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.json.JSONObject;
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,7 +77,7 @@ public class MockSurveyService implements SurveyService {
     }
 
     @Override
-    public void submitResponses(@NonNull String id, @NonNull JSONObject body,
+    public void submitResponses(@NonNull String id, @NonNull JSONArray responses,
                                 @Nullable OnSuccessListener<Void> onSuccessListener,
                                 @Nullable OnFailureListener onFailureListener) {
         if (generateNegativeResponses) {

@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
+
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.ListItem;
 import de.fhswf.moa.surveys.list.item.SingleQuestionListItem;
@@ -14,11 +16,10 @@ import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.SingleQuestionViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.SurveyListEntryViewHolder;
 
-import java.util.ArrayList;
-
 public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private ArrayList<ListItem> items;
+
 
     public ListAdapter() {
         this.items = new ArrayList<>();

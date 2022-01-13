@@ -6,9 +6,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.InputQuestionListItem;
-import de.fhswf.moa.surveys.list.item.MultiQuestionListItem;
-import de.fhswf.moa.surveys.model.InputQuestion;
 
 public class InputQuestionViewHolder extends BaseViewHolder<InputQuestionListItem> {
 
@@ -18,9 +17,9 @@ public class InputQuestionViewHolder extends BaseViewHolder<InputQuestionListIte
 
     public InputQuestionViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.title = title;
-        this.description = description;
-        this.container = container;
+        this.title = itemView.findViewById(R.id.title);
+        this.description = itemView.findViewById(R.id.description);
+        this.container = itemView.findViewById(R.id.container);
     }
     @Override
     public void bind(InputQuestionListItem item) {

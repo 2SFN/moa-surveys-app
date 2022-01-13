@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import de.fhswf.moa.surveys.list.item.MultiQuestionListItem;
+import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.RatingQuestionListItem;
 
 public class RatingQuestionViewHolder extends BaseViewHolder<RatingQuestionListItem> {
@@ -16,9 +16,9 @@ public class RatingQuestionViewHolder extends BaseViewHolder<RatingQuestionListI
 
     public RatingQuestionViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.title = title;
-        this.description = description;
-        this.container = container;
+        this.title = itemView.findViewById(R.id.title);
+        this.description = itemView.findViewById(R.id.description);
+        this.container = itemView.findViewById(R.id.container);
     }
 
     @Override

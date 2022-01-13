@@ -6,7 +6,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/cardview"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginStart="15dp"
     android:layout_marginEnd="10dp"
     card_view:contentPadding="8dp"
@@ -16,8 +16,13 @@
     android:layout_margin="4dp" >
 
     <!--Text View over Card View-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/container">
     <TextView
-        android:id="@+id/textviewitem"
+        android:id="@+id/title"
         android:layout_gravity="center"
         android:layout_marginTop="4dp"
         android:layout_marginBottom="4dp"
@@ -25,5 +30,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#fff"/>
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:layout_marginTop="4dp"
+        />
+    </LinearLayout>
+
 
 </androidx.cardview.widget.CardView>

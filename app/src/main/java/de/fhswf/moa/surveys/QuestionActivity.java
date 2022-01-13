@@ -38,7 +38,7 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
-        ListAdapter adapter = new ListAdapter(this);
+        ListAdapter adapter = new ListAdapter();
         container.setAdapter(adapter);
 
     }

@@ -36,15 +36,6 @@ public class SingleSelectQuestion extends Question {
         this.options = options;
     }
 
-    public Question addOption(String option) {
-        if(this.options == null)
-            this.options = new ArrayList<>();
-
-        options.add(option);
-
-        return this;
-    }
-
     public Map<String, Integer> getResults() {
         return results;
     }

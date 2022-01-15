@@ -128,6 +128,10 @@ public class QuestionParser implements ResponseParser<Question> {
             throws JSONException {
         MultiSelectQuestion question = new MultiSelectQuestion();
 
+        // Maximum selected options
+        question.setMaxSelectedOptions(data.optInt("maxSelectedOptions",
+                MultiSelectQuestion.DEFAULT_MAX_SELECTION));
+
         // Read survey options
         JSONArray array = data.getJSONArray("options");
         ArrayList<String> options = new ArrayList<>(array.length());

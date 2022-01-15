@@ -20,8 +20,6 @@ public class MultiSelectQuestion extends SingleSelectQuestion {
 
     public static final int DEFAULT_MAX_SELECTION = NO_SELECTION_LIMIT;
 
-    // TODO: Add minimum selected options?
-
     private int maxSelectedOptions = DEFAULT_MAX_SELECTION;
 
     public MultiSelectQuestion() {

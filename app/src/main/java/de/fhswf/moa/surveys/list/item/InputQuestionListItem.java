@@ -1,10 +1,9 @@
 package de.fhswf.moa.surveys.list.item;
 
 import de.fhswf.moa.surveys.model.InputQuestion;
-import de.fhswf.moa.surveys.model.MultiSelectQuestion;
 
 public class InputQuestionListItem implements ListItem{
-    public static final int TYPE = 2;
+    public static final int TYPE = 3;
 
     private InputQuestion question;
 

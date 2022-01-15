@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity  implements SurveyListItem.O
     @Override
     public void onSurveyClick(@NonNull SurveyListItem item) {
         Intent intent = new Intent(this, QuestionActivity.class);
+        intent.putExtra("ID",item.getSurvey().getId());
         startActivity(intent);
     }
 /*

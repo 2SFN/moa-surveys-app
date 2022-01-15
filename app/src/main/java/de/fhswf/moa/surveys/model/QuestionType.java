@@ -11,7 +11,9 @@ public enum QuestionType {
     INPUT("INPUT"),
     SINGLE_SELECT("SINGLE_SELECT"),
     MULTI_SELECT("MULTI_SELECT"),
-    RATING("RATING");
+    RATING("RATING"),
+    END("END");
+
 
     private final String value;
 

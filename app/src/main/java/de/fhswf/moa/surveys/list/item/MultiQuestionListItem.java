@@ -4,7 +4,7 @@ import de.fhswf.moa.surveys.model.MultiSelectQuestion;
 
 
 public class MultiQuestionListItem implements ListItem{
-    public static final int TYPE = 2;
+    public static final int TYPE = 5;
 
     private MultiSelectQuestion question;
 

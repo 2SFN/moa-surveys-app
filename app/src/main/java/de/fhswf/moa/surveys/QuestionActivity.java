@@ -1,7 +1,6 @@
 package de.fhswf.moa.surveys;
 
-import static android.service.controls.ControlsProviderService.TAG;
-
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -13,13 +12,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
 import de.fhswf.moa.surveys.list.ListAdapter;
+import de.fhswf.moa.surveys.list.item.EndQuestionListItem;
 
-public class QuestionActivity extends AppCompatActivity {
+public class QuestionActivity extends AppCompatActivity implements EndQuestionListItem.OnEndListener {
+
+    private String SurveyID;
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.question_view);
 
+        // ID des Survey aus dem Intent entnehmen und in einem String speichern
+        Intent MainActivityIntent = getIntent();
+        SurveyID = MainActivityIntent.getStringExtra("ID");
+
+        //Setting up View
+        setContentView(R.layout.question_view);
         RecyclerView container = findViewById(R.id.question_container);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
@@ -38,9 +45,20 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
+        //Recyclerview Adapter anfügen
         ListAdapter adapter = new ListAdapter();
         container.setAdapter(adapter);
 
     }
 
+    /**
+     *
+     * @param item
+     */
+    @Override
+    public void onEndButtonClick(@NonNull EndQuestionListItem item) {
+        Intent intent = new Intent(this,ResultActivity.class);
+        intent.putExtra("ID",SurveyID);
+        startActivity(intent);
+    }
 }

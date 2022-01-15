@@ -30,14 +30,14 @@
             android:text="Vielen Dank für Ihre Teilnahme ! \n über den Button kommen \nSie zum Ergebnis."
             android:textColor="#fff"
             android:textSize="25sp"
-            card_view:layout_constraintBottom_toTopOf="@+id/button"
+            card_view:layout_constraintBottom_toTopOf="@+id/resultbtn"
             card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toStartOf="parent"
             card_view:layout_constraintTop_toTopOf="parent"
             card_view:layout_constraintVertical_bias="0.897" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/resultbtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ergebnisse"

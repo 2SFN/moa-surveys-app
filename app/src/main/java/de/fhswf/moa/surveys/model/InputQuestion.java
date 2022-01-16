@@ -3,6 +3,8 @@ package de.fhswf.moa.surveys.model;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -48,6 +50,25 @@ public class InputQuestion extends Question {
 
     public void setResults(@Nullable List<String> results) {
         this.results = results;
+    }
+
+    /**
+     * Einfache Methode, mit der mehrere Ergebnisse hinzugefügt werden können.
+     *
+     * Verwendet beim Bauen der Strukturen in der
+     * {@link de.fhswf.moa.surveys.api.service.MockSurveyService} Implementierung.
+     *
+     * @param results Neue Ergebnisse.
+     * @return Instance.
+     */
+    public InputQuestion addResults(@NonNull String... results) {
+        if(this.results == null)
+            this.results = new ArrayList<>();
+
+        Collections.addAll(this.results, results);
+        setRespondents(getRespondents() + results.length);
+
+        return this;
     }
 
     @NonNull

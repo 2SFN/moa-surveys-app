@@ -3,6 +3,10 @@ package de.fhswf.moa.surveys.list.item;
 
 import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 
+/**
+ * Wrapper Class für SingleSelectQuestion
+ * @author  Joey F.M. Esteves , Konzept SFN
+ */
 public class SingleQuestionListItem implements ListItem {
     public static final int TYPE = 4;
 
@@ -12,6 +16,10 @@ public class SingleQuestionListItem implements ListItem {
         this.question = question;
     }
 
+    /**
+     * Getter für SingleSelectQuestion
+     * @return question
+     */
     public SingleSelectQuestion getQuestion() {
         return question;
     }

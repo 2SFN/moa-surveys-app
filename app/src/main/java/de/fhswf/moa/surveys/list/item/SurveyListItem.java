@@ -4,6 +4,10 @@ import androidx.annotation.NonNull;
 
 import de.fhswf.moa.surveys.model.Survey;
 
+/**
+ * Wrapper Class für Survey
+ * @author Joey F.M. Esteves , Konzept SFN
+ */
 public class SurveyListItem implements ListItem {
     public static final int TYPE = 1;
 
@@ -23,15 +27,28 @@ public class SurveyListItem implements ListItem {
         return TYPE;
     }
 
+    /**
+     * Getter Listener
+     * @return onSurveyListener
+     */
     public OnSurveyListener getOnSurveyListener() {
         return onSurveyListener;
     }
 
+    /**
+     * Setter Listener
+     * @param onSurveyListener
+     * @return onSurveyListener
+     */
     public SurveyListItem setOnSurveyListener(OnSurveyListener onSurveyListener) {
         this.onSurveyListener = onSurveyListener;
         return this;
     }
 
+    /**
+     * Interface für Listener
+     * @author Joey F.M. Esteves
+     */
     public interface OnSurveyListener{
         void onSurveyClick(@NonNull SurveyListItem item);
     }

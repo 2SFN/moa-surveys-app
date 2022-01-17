@@ -11,12 +11,39 @@ import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import de.fhswf.moa.surveys.api.service.RemoteSurveyService;
+import de.fhswf.moa.surveys.api.service.SurveyService;
 import de.fhswf.moa.surveys.list.ListAdapter;
 import de.fhswf.moa.surveys.list.item.EndQuestionListItem;
+import de.fhswf.moa.surveys.list.item.InfoQuestionListItem;
+import de.fhswf.moa.surveys.list.item.InputQuestionListItem;
+import de.fhswf.moa.surveys.list.item.ListItem;
+import de.fhswf.moa.surveys.list.item.MultiQuestionListItem;
+import de.fhswf.moa.surveys.list.item.QuestionResultItem;
+import de.fhswf.moa.surveys.list.item.RatingQuestionListItem;
+import de.fhswf.moa.surveys.list.item.SingleQuestionListItem;
+import de.fhswf.moa.surveys.model.EndQuestion;
+import de.fhswf.moa.surveys.model.InfoQuestion;
+import de.fhswf.moa.surveys.model.InputQuestion;
+import de.fhswf.moa.surveys.model.MultiSelectQuestion;
+import de.fhswf.moa.surveys.model.Question;
+import de.fhswf.moa.surveys.model.RatingQuestion;
+import de.fhswf.moa.surveys.model.SingleSelectQuestion;
+import de.fhswf.moa.surveys.model.Survey;
 
-public class QuestionActivity extends AppCompatActivity implements EndQuestionListItem.OnEndListener {
+public class QuestionActivity extends AppCompatActivity
+        implements EndQuestionListItem.OnEndListener {
 
     private String SurveyID;
+    private Survey survey;
+
+    private SurveyService surveyService;
+    private ListAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -46,9 +73,59 @@ public class QuestionActivity extends AppCompatActivity implements EndQuestionLi
         });
 
         //Recyclerview Adapter anfügen
-        ListAdapter adapter = new ListAdapter();
+        adapter = new ListAdapter();
         container.setAdapter(adapter);
 
+        this.surveyService = new RemoteSurveyService(this);
+        surveyService.fetchSurveyDetails(
+                SurveyID,
+                this::handleSurveyResult,
+                this::handleError
+        );
+
+    }
+
+    private void handleSurveyResult(Survey result) {
+        this.survey = result;
+
+        if(survey.getQuestions() == null) {
+            // TODO: Fehler behandeln
+            return;
+        }
+
+        for(Question c : survey.getQuestions()) {
+            // TODO: Fragen in Liste laden
+            ListItem item;
+            switch (c.getType()) {
+                case INFO:
+                    item = new InfoQuestionListItem((InfoQuestion) c);
+                    break;
+                case INPUT:
+                    item = new InputQuestionListItem((InputQuestion) c);
+                    break;
+                case SINGLE_SELECT:
+                    item = new SingleQuestionListItem((SingleSelectQuestion) c);
+                    break;
+                case MULTI_SELECT:
+                    item = new MultiQuestionListItem((MultiSelectQuestion) c);
+                    break;
+                case RATING:
+                    item = new RatingQuestionListItem((RatingQuestion) c);
+                    break;
+                default:
+                    throw new RuntimeException("Unsupported question type!");
+            }
+
+            adapter.add(item);
+        }
+
+        adapter.add(new EndQuestionListItem(new EndQuestion(
+                "", "Fertig :)", "Jetzt absenden und Ergebnisse anschauen."
+        )));
+    }
+
+    private void handleError(Throwable e) {
+        // TODO
     }
 
     /**
@@ -57,8 +134,37 @@ public class QuestionActivity extends AppCompatActivity implements EndQuestionLi
      */
     @Override
     public void onEndButtonClick(@NonNull EndQuestionListItem item) {
-        Intent intent = new Intent(this,ResultActivity.class);
-        intent.putExtra("ID",SurveyID);
-        startActivity(intent);
+        try {
+            // I. Ergebnisse übermitteln
+            JSONArray results = new JSONArray();
+
+            for(ListItem c : adapter.getItems()) {
+                if(c instanceof QuestionResultItem) {
+                    JSONObject res = ((QuestionResultItem) c).getResult();
+                    if(res != null)
+                        results.put(res);
+                }
+            }
+
+            // Ergebnis-Array fertig
+            // Ergebnisse senden
+            surveyService.submitResponses(
+                    survey.getId(),
+                    results,
+                    r -> {
+                        // II. Zur result-activity
+                        Intent intent = new Intent(this,ResultActivity.class);
+                        intent.putExtra("ID",SurveyID);
+                        startActivity(intent);
+                    },
+                    e -> {
+                        // TODO
+                    }
+            );
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+            // TODO
+        }
     }
 }

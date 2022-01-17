@@ -10,7 +10,9 @@ import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 import de.fhswf.moa.surveys.api.OnFailureListener;
 import de.fhswf.moa.surveys.api.OnSuccessListener;
@@ -47,7 +49,7 @@ public class MockSurveyService implements SurveyService {
     @Override
     public void fetchSurveyList(@Nullable OnSuccessListener<List<Survey>> onSuccessListener,
                                 @Nullable OnFailureListener onFailureListener) {
-        if (generateNegativeResponses) {
+        if (isGenerateNegativeResponses()) {
             errorCall("FetchSurveyList", onFailureListener);
         } else if (onSuccessListener != null) {
             handler.postDelayed(() -> onSuccessListener.onSuccess(
@@ -59,7 +61,7 @@ public class MockSurveyService implements SurveyService {
     public void fetchSurveyDetails(String id,
                                    @Nullable OnSuccessListener<Survey> onSuccessListener,
                                    @Nullable OnFailureListener onFailureListener) {
-        if (generateNegativeResponses) {
+        if (isGenerateNegativeResponses()) {
             errorCall("FetchSurveyDetails", onFailureListener);
         } else if (onSuccessListener != null) {
             handler.postDelayed(() -> {
@@ -80,7 +82,7 @@ public class MockSurveyService implements SurveyService {
     public void submitResponses(@NonNull String id, @NonNull JSONArray responses,
                                 @Nullable OnSuccessListener<Void> onSuccessListener,
                                 @Nullable OnFailureListener onFailureListener) {
-        if (generateNegativeResponses) {
+        if (isGenerateNegativeResponses()) {
             errorCall("SubmitResponse", onFailureListener);
         } else if (onSuccessListener != null) {
             handler.postDelayed(() -> onSuccessListener.onSuccess(null), DELAY);
@@ -113,7 +115,9 @@ public class MockSurveyService implements SurveyService {
                         "Q1-2", "Gedanken",
                         "Beschreibe, wie du dich fühlst, wenn du über das Thema " +
                                 "'Farben' nachdenkst.", 500
-                )).addQuestion(new SingleSelectQuestion(
+                ).addResults(
+                        "Gut", "Schlecht", "Medium", "Glücklich", "Nervös"
+                )).addQuestion(randomizeSelectionResults(new SingleSelectQuestion(
                         "Q1-3", "Lieblingsfarbe",
                         "Wähle hier deine absolute Lieblingsfarbe aus. Sollte deine " +
                                 "Farbe nicht aufgeführt sein, wähle bitte eine Farbe, die " +
@@ -121,19 +125,19 @@ public class MockSurveyService implements SurveyService {
                 ).addOption("Rot").addOption("Blau").addOption("Weiß").addOption("Schwarz")
                         .addOption("Grün").addOption("Magenta").addOption("Aubergine")
                         .addOption("Kristall").addOption("Türkis").addOption("Lachs")
-                        .addOption("Salbei").addOption("Fuchsia").addOption("Beige")
-                ).addQuestion(new MultiSelectQuestion(
+                        .addOption("Salbei").addOption("Fuchsia").addOption("Beige"))
+                ).addQuestion(randomizeSelectionResults(new MultiSelectQuestion(
                         "Q1-4", "Hässliche Farben",
                         "Wähle bis zu fünf Farben, die absolut unschön aussehen.",
                         5
                 ).addOption("Rot").addOption("Blau").addOption("Weiß").addOption("Schwarz")
                         .addOption("Grün").addOption("Magenta").addOption("Aubergine")
                         .addOption("Kristall").addOption("Türkis").addOption("Lachs")
-                        .addOption("Salbei").addOption("Fuchsia").addOption("Beige")
-                ).addQuestion(new RatingQuestion(
+                        .addOption("Salbei").addOption("Fuchsia").addOption("Beige"))
+                ).addQuestion(randomizeRatingResults(new RatingQuestion(
                         "Q1-5", "Feedback zur Umfrage",
                         "Was hältst du von dieser Umfrage?"
-                ))
+                )))
         );
 
         surveys.add(new Survey(
@@ -153,6 +157,49 @@ public class MockSurveyService implements SurveyService {
                 "Diese Umfrage enthält keine tatsächlichen Fragen und ist nur hier, " +
                         "damit alles ein wenig gefüllter ausschaut."
         ).addQuestion(new InfoQuestion("Q4-1", "Leer", "Hier ist nichts.")));
+    }
+
+    /**
+     * Einfache Helfer-Methode, welche die Ergebnisse der angegebenen Question mit zufälligen
+     * Werten füllt.
+     *
+     * @param question Ziel-Frage.
+     * @return Ziel-Frage.
+     */
+    private SingleSelectQuestion randomizeSelectionResults(@NonNull SingleSelectQuestion question) {
+        HashMap<String, Integer> map = new HashMap<>(question.getOptions().size());
+
+        Random random = new Random();
+        int sum = 0;
+
+        for(String c : question.getOptions()) {
+            int rnd = random.nextInt(123);
+            map.put(c, rnd);
+            sum += rnd;
+        }
+
+        question.setResults(map);
+        question.setRespondents(sum);
+
+        return question;
+    }
+
+    private RatingQuestion randomizeRatingResults(@NonNull RatingQuestion question) {
+        HashMap<Integer, Integer> map = new HashMap<>(5);
+
+        Random random = new Random();
+        int sum = 0;
+
+        for(int i = 1; i <= 5; i++) {
+            int rnd = random.nextInt(123);
+            map.put(i, rnd);
+            sum += rnd;
+        }
+
+        question.setResults(map);
+        question.setRespondents(sum);
+
+        return question;
     }
 
 }

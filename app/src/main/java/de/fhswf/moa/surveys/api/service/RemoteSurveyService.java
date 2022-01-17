@@ -24,7 +24,7 @@ import de.fhswf.moa.surveys.model.Survey;
  * @see RemoteRequest Für HTTP-Anfragen verwendet.
  */
 public class RemoteSurveyService implements SurveyService {
-    public static final String BASE_URL = "https://167.86.108.121:9444/SurveysBackend/api";
+    public static final String BASE_URL = "http://167.86.108.121:9084/SurveyBackend/api";
 
     private final @NonNull
     Context context;

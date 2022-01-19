@@ -1,6 +1,7 @@
 package de.fhswf.moa.surveys.list.viewholder;
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -16,6 +17,7 @@ public class SingleQuestionViewHolder extends BaseViewHolder<SingleQuestionListI
     private TextView title;
     private TextView description;
     private LinearLayout container;
+    private RadioButton resultbtn;
 
     public SingleQuestionViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -35,11 +37,24 @@ public class SingleQuestionViewHolder extends BaseViewHolder<SingleQuestionListI
 
         // RadioGroup für Single Selection
         RadioGroup radioGroup = new RadioGroup(itemView.getContext());
-        container.addView(radioGroup);
+        ViewGroup.MarginLayoutParams marginparams = new ViewGroup.MarginLayoutParams(ViewGroup.MarginLayoutParams.MATCH_PARENT, ViewGroup.MarginLayoutParams.MATCH_PARENT);
+        marginparams.topMargin = 10;
+        radioGroup.setLayoutParams(marginparams);
+//TODO Test this method
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                resultbtn = itemView.findViewById(checkedId);
+                item.setUserInput(resultbtn.getText().toString());
+            }
+        });
 
+        int i = 1;
         for(String c : item.getQuestion().getOptions()) {
             RadioButton radioButton = new RadioButton(container.getContext());
             radioButton.setText(c);
+            radioButton.setId(i);
+            i++;
 
             radioGroup.addView(radioButton);
         }

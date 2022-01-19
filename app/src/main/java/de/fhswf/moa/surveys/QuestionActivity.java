@@ -120,8 +120,7 @@ public class QuestionActivity extends AppCompatActivity
         }
 
         adapter.add(new EndQuestionListItem(new EndQuestion(
-                "", "Fertig :)", "Jetzt absenden und Ergebnisse anschauen."
-        )));
+                "", "Fertig :)")));
     }
 
     private void handleError(Throwable e) {

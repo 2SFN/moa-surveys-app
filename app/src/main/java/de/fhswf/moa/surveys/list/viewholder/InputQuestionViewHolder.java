@@ -50,5 +50,6 @@ public class InputQuestionViewHolder extends BaseViewHolder<InputQuestionListIte
                 item.setUserInput(s.toString());
             }
         });
+        container.addView(textInputEditText);
     }
 }

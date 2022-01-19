@@ -2,6 +2,7 @@ package de.fhswf.moa.surveys.list.viewholder;
 
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,5 +30,15 @@ public class RatingQuestionViewHolder extends BaseViewHolder<RatingQuestionListI
         // Sicherheitsmassnahme
         container.removeAllViews();
         // TODO Rating hinzufügen
+        RatingBar ratingBar = new RatingBar(container.getContext());
+        ratingBar.setStepSize(0.5F);
+        ratingBar.setNumStars(5);
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                item.setUserInput(rating);
+            }
+        });
+        container.addView(ratingBar);
     }
 }

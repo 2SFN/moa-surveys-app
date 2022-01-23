@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
-import de.fhswf.moa.surveys.api.service.MockSurveyService;
 import de.fhswf.moa.surveys.api.service.RemoteSurveyService;
 import de.fhswf.moa.surveys.api.service.SurveyService;
 import de.fhswf.moa.surveys.list.ListAdapter;
@@ -26,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements SurveyListItem.On
     private ListAdapter adapter;
 
     private SurveyService surveyService;
-    private MockSurveyService MsurveyService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +42,11 @@ public class MainActivity extends AppCompatActivity implements SurveyListItem.On
 
         // Init survey-service
         this.surveyService = new RemoteSurveyService(this);
-//        this.surveyService = new RemoteSurveyService(this);   Live-Version
+//        this.surveyService = new MockSurveyService();   Mock-Version
 
         // Daten von Service laden
 
-        MsurveyService.fetchSurveyList(
+        surveyService.fetchSurveyList(
                 this::addSurveysToList,
                 this::showErrorDialog
         );

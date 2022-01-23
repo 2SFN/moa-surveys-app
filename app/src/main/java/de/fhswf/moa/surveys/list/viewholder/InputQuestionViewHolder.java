@@ -9,10 +9,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.TextInputLayout;
 
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.InputQuestionListItem;
+import de.fhswf.moa.surveys.util.DimensionsUtil;
 
 public class InputQuestionViewHolder extends BaseViewHolder<InputQuestionListItem> {
 
@@ -34,9 +34,13 @@ public class InputQuestionViewHolder extends BaseViewHolder<InputQuestionListIte
         // Sicherheitsmassnahme
         container.removeAllViews();
 
-        // TODO Sinnvolles Textfeld hinzufügen
-        TextInputLayout textInputLayout = new TextInputLayout(container.getContext());
+        // Eingabe-Text-Feld
         TextInputEditText textInputEditText = new TextInputEditText(container.getContext());
+
+        // Styles
+        textInputEditText.setBackgroundResource(R.drawable.white_bg);
+        int editTextPadding = (int) DimensionsUtil.dpToPx(textInputEditText.getResources(), 12);
+        textInputEditText.setPadding(editTextPadding, editTextPadding, editTextPadding, editTextPadding);
 
         textInputEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -50,6 +54,7 @@ public class InputQuestionViewHolder extends BaseViewHolder<InputQuestionListIte
                 item.setUserInput(s.toString());
             }
         });
+
         container.addView(textInputEditText);
     }
 }

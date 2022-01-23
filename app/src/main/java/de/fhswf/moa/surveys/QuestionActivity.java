@@ -2,7 +2,6 @@ package de.fhswf.moa.surveys;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -63,16 +62,6 @@ public class QuestionActivity extends AppCompatActivity
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(container);
 
-
-        container.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                int current = layoutManager.findLastVisibleItemPosition();
-                Log.i("Test", "Current position: " + current);
-            }
-        });
-
         //Recyclerview Adapter anfügen
         adapter = new ListAdapter();
         container.setAdapter(adapter);
@@ -95,7 +84,6 @@ public class QuestionActivity extends AppCompatActivity
         }
 
         for(Question c : survey.getQuestions()) {
-            // TODO: Fragen in Liste laden
             ListItem item;
             switch (c.getType()) {
                 case INFO:
@@ -120,6 +108,7 @@ public class QuestionActivity extends AppCompatActivity
             adapter.add(item);
         }
 
+        // TODO: End-Card anpassen
         adapter.add(new EndQuestionListItem(new EndQuestion(
                 "", "Fertig :)"))
                 .setOnEndListener(this));
@@ -130,8 +119,9 @@ public class QuestionActivity extends AppCompatActivity
     }
 
     /**
+     * Aufgerufen, wenn der "Ergebnisse anzeigen" Button geklickt wird.
      *
-     * @param item
+     * @param item End-Card-Item.
      */
     @Override
     public void onEndButtonClick(@NonNull EndQuestionListItem item) {
@@ -161,12 +151,13 @@ public class QuestionActivity extends AppCompatActivity
                     e -> {
                         e.printStackTrace();
                         Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        // TODO: Fehler-Behandlung
                     }
             );
 
         } catch (JSONException e) {
             e.printStackTrace();
-            // TODO
+            // TODO: Fehler-Behandlung
         }
     }
 }

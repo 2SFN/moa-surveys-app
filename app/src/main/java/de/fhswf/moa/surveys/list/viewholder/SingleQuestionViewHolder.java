@@ -2,6 +2,7 @@ package de.fhswf.moa.surveys.list.viewholder;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.SingleQuestionListItem;
+import de.fhswf.moa.surveys.util.DimensionsUtil;
 
 public class SingleQuestionViewHolder extends BaseViewHolder<SingleQuestionListItem> {
 
@@ -37,26 +39,25 @@ public class SingleQuestionViewHolder extends BaseViewHolder<SingleQuestionListI
 
         // RadioGroup für Single Selection
         RadioGroup radioGroup = new RadioGroup(itemView.getContext());
-        ViewGroup.MarginLayoutParams marginparams = new ViewGroup.MarginLayoutParams(ViewGroup.MarginLayoutParams.MATCH_PARENT, ViewGroup.MarginLayoutParams.MATCH_PARENT);
-        marginparams.topMargin = 10;
+        ViewGroup.MarginLayoutParams marginparams = new ViewGroup.MarginLayoutParams(
+                ViewGroup.MarginLayoutParams.MATCH_PARENT,
+                ViewGroup.MarginLayoutParams.MATCH_PARENT);
+        marginparams.topMargin = (int) DimensionsUtil.dpToPx(container.getResources(), 16.0f);
         radioGroup.setLayoutParams(marginparams);
 //TODO Test this method
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                resultbtn = itemView.findViewById(checkedId);
-                item.setUserInput(resultbtn.getText().toString());
-            }
-        });
 
-        int i = 1;
+        CompoundButton.OnCheckedChangeListener checkedChangeListener = (button, checked) -> {
+            item.setUserInput(button.getText().toString());
+        };
+
         for(String c : item.getQuestion().getOptions()) {
             RadioButton radioButton = new RadioButton(container.getContext());
             radioButton.setText(c);
-            radioButton.setId(i);
-            i++;
+            radioButton.setOnCheckedChangeListener(checkedChangeListener);
 
             radioGroup.addView(radioButton);
         }
+
+        container.addView(radioGroup);
     }
 }

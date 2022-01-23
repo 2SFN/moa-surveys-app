@@ -28,6 +28,7 @@ public class MultiQuestionViewHolder extends BaseViewHolder<MultiQuestionListIte
 
     @Override
     public void bind(MultiQuestionListItem item){
+        userinput = new ArrayList<>();
         title.setText(item.getQuestion().getTitle());
         description.setText(item.getQuestion().getDescription());
 
@@ -49,9 +50,11 @@ public class MultiQuestionViewHolder extends BaseViewHolder<MultiQuestionListIte
                     } else if (!checkBox.isChecked()) {
                         userinput.remove(checkBox.getText().toString());
                     }
+
                     item.setUserInput(userinput);
                 }
             });
+
             container.addView(checkBox);
         }
             /*

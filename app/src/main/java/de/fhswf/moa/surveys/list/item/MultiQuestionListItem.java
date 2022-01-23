@@ -58,7 +58,7 @@ public class MultiQuestionListItem implements ListItem, QuestionResultItem{
             return new JSONObject()
                     .put("type",question.getType().getValue())
                     .put("id",question.getId())
-                    .put("responses", responses);
+                    .put("response", responses);
         }
         return null;
     }

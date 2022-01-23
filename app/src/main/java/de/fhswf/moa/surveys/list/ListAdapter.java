@@ -109,4 +109,8 @@ public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         items.add(item);
         notifyItemInserted(index);
     }
+
+    public ArrayList<ListItem> getItems() {
+        return items;
+    }
 }

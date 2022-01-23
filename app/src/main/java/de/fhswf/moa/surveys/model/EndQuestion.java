@@ -13,10 +13,9 @@ public static final QuestionType QUESTION_TYPE = QuestionType.INFO;
     public EndQuestion(){
 
     }
-    public EndQuestion(String id, String title, String description){
+    public EndQuestion(String id, String title){
         this.setId(id);
         this.setTitle(title);
-        this.setDescription(description);
     }
 }
 

@@ -3,6 +3,7 @@ package de.fhswf.moa.surveys;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -120,7 +121,8 @@ public class QuestionActivity extends AppCompatActivity
         }
 
         adapter.add(new EndQuestionListItem(new EndQuestion(
-                "", "Fertig :)")));
+                "", "Fertig :)"))
+                .setOnEndListener(this));
     }
 
     private void handleError(Throwable e) {
@@ -157,7 +159,8 @@ public class QuestionActivity extends AppCompatActivity
                         startActivity(intent);
                     },
                     e -> {
-                        // TODO
+                        e.printStackTrace();
+                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
             );
 

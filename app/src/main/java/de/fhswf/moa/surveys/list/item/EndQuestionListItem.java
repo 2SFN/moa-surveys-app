@@ -40,8 +40,9 @@ public class EndQuestionListItem implements ListItem {
      * @param onEndListener
      */
     //TODO ist dieser Setter Falsch ? vgl. Survey setter
-    public void setOnEndListener(OnEndListener onEndListener) {
+    public EndQuestionListItem setOnEndListener(OnEndListener onEndListener) {
         this.onEndListener = onEndListener;
+        return this;
     }
 
     @Override

@@ -2,6 +2,8 @@ package de.fhswf.moa.surveys;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -75,6 +77,19 @@ public class QuestionActivity extends AppCompatActivity
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        menu.add("Ergebnisse")
+                .setOnMenuItemClickListener(m -> {
+                    openResults();
+                    return true;
+                }).setIcon(R.drawable.ic_bar_chart)
+                .setShowAsAction(MenuItem.SHOW_AS_ACTION_ALWAYS);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
     private void handleSurveyResult(Survey result) {
         this.survey = result;
 
@@ -146,9 +161,7 @@ public class QuestionActivity extends AppCompatActivity
                     results,
                     r -> {
                         // II. Zur result-activity
-                        Intent intent = new Intent(this,ResultActivity.class);
-                        intent.putExtra("ID",SurveyID);
-                        startActivity(intent);
+                        openResults();
                     },
                     e -> {
                         e.printStackTrace();
@@ -161,5 +174,11 @@ public class QuestionActivity extends AppCompatActivity
             e.printStackTrace();
             // TODO: Fehler-Behandlung
         }
+    }
+
+    private void openResults() {
+        Intent intent = new Intent(this,ResultActivity.class);
+        intent.putExtra("ID",SurveyID);
+        startActivity(intent);
     }
 }

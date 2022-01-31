@@ -1,4 +1,4 @@
-package de.fhswf.moa.surveys.list.viewholder;
+package de.fhswf.moa.surveys.list.viewholder.question;
 
 import android.view.View;
 import android.widget.TextView;
@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.InfoQuestionListItem;
+import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
 
 public class InfoQuestionViewHolder  extends BaseViewHolder<InfoQuestionListItem> {
 

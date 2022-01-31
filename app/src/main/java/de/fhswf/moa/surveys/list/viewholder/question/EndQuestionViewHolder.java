@@ -1,4 +1,4 @@
-package de.fhswf.moa.surveys.list.viewholder;
+package de.fhswf.moa.surveys.list.viewholder.question;
 
 import android.view.View;
 import android.widget.Button;
@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.EndQuestionListItem;
+import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
 
 public class EndQuestionViewHolder extends BaseViewHolder<EndQuestionListItem> implements View.OnClickListener {
 

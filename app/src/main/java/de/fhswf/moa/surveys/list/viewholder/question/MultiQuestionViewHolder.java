@@ -1,4 +1,4 @@
-package de.fhswf.moa.surveys.list.viewholder;
+package de.fhswf.moa.surveys.list.viewholder.question;
 
 import android.view.View;
 import android.widget.CheckBox;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.MultiQuestionListItem;
+import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
 
 public class MultiQuestionViewHolder extends BaseViewHolder<MultiQuestionListItem> {
     private TextView title;

@@ -18,12 +18,12 @@ import de.fhswf.moa.surveys.list.item.question.RatingQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.SingleQuestionListItem;
 import de.fhswf.moa.surveys.list.item.SurveyListItem;
 import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
-import de.fhswf.moa.surveys.list.viewholder.EndQuestionViewHolder;
-import de.fhswf.moa.surveys.list.viewholder.InfoQuestionViewHolder;
-import de.fhswf.moa.surveys.list.viewholder.InputQuestionViewHolder;
-import de.fhswf.moa.surveys.list.viewholder.MultiQuestionViewHolder;
-import de.fhswf.moa.surveys.list.viewholder.RatingQuestionViewHolder;
-import de.fhswf.moa.surveys.list.viewholder.SingleQuestionViewHolder;
+import de.fhswf.moa.surveys.list.viewholder.question.EndQuestionViewHolder;
+import de.fhswf.moa.surveys.list.viewholder.question.InfoQuestionViewHolder;
+import de.fhswf.moa.surveys.list.viewholder.question.InputQuestionViewHolder;
+import de.fhswf.moa.surveys.list.viewholder.question.MultiQuestionViewHolder;
+import de.fhswf.moa.surveys.list.viewholder.question.RatingQuestionViewHolder;
+import de.fhswf.moa.surveys.list.viewholder.question.SingleQuestionViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.SurveyListEntryViewHolder;
 
 public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {

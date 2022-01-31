@@ -1,4 +1,4 @@
-package de.fhswf.moa.surveys.list.viewholder;
+package de.fhswf.moa.surveys.list.viewholder.question;
 
 import android.view.Gravity;
 import android.view.View;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.RatingQuestionListItem;
+import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
 
 public class RatingQuestionViewHolder extends BaseViewHolder<RatingQuestionListItem> {
     private TextView title;

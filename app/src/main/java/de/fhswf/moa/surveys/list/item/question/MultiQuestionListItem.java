@@ -1,4 +1,4 @@
-package de.fhswf.moa.surveys.list.item;
+package de.fhswf.moa.surveys.list.item.question;
 
 import androidx.annotation.Nullable;
 
@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import de.fhswf.moa.surveys.list.item.ListItem;
 import de.fhswf.moa.surveys.model.MultiSelectQuestion;
 
 /**

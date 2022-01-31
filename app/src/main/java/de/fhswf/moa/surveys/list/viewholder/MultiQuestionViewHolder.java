@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 
 import de.fhswf.moa.surveys.R;
-import de.fhswf.moa.surveys.list.item.MultiQuestionListItem;
+import de.fhswf.moa.surveys.list.item.question.MultiQuestionListItem;
 
 public class MultiQuestionViewHolder extends BaseViewHolder<MultiQuestionListItem> {
     private TextView title;

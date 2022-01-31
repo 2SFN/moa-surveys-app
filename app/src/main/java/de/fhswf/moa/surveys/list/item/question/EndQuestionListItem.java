@@ -1,7 +1,8 @@
-package de.fhswf.moa.surveys.list.item;
+package de.fhswf.moa.surveys.list.item.question;
 
 import androidx.annotation.NonNull;
 
+import de.fhswf.moa.surveys.list.item.ListItem;
 import de.fhswf.moa.surveys.model.EndQuestion;
 
 /**

@@ -6,7 +6,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import de.fhswf.moa.surveys.R;
-import de.fhswf.moa.surveys.list.item.InfoQuestionListItem;
+import de.fhswf.moa.surveys.list.item.question.InfoQuestionListItem;
 
 public class InfoQuestionViewHolder  extends BaseViewHolder<InfoQuestionListItem> {
 

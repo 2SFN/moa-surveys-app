@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import com.google.android.material.textfield.TextInputEditText;
 
 import de.fhswf.moa.surveys.R;
-import de.fhswf.moa.surveys.list.item.InputQuestionListItem;
+import de.fhswf.moa.surveys.list.item.question.InputQuestionListItem;
 import de.fhswf.moa.surveys.util.DimensionsUtil;
 
 public class InputQuestionViewHolder extends BaseViewHolder<InputQuestionListItem> {

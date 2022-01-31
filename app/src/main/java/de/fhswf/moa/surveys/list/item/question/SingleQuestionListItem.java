@@ -1,4 +1,4 @@
-package de.fhswf.moa.surveys.list.item;
+package de.fhswf.moa.surveys.list.item.question;
 
 
 import androidx.annotation.Nullable;
@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.fhswf.moa.surveys.list.item.ListItem;
 import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 
 /**

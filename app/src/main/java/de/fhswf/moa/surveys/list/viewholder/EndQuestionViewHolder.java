@@ -7,7 +7,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import de.fhswf.moa.surveys.R;
-import de.fhswf.moa.surveys.list.item.EndQuestionListItem;
+import de.fhswf.moa.surveys.list.item.question.EndQuestionListItem;
 
 public class EndQuestionViewHolder extends BaseViewHolder<EndQuestionListItem> implements View.OnClickListener {
 

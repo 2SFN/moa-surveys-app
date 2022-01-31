@@ -1,4 +1,4 @@
-package de.fhswf.moa.surveys.list.item;
+package de.fhswf.moa.surveys.list.item.question;
 
 import androidx.annotation.Nullable;
 

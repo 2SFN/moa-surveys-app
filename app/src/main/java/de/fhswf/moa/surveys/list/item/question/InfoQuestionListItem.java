@@ -1,5 +1,6 @@
-package de.fhswf.moa.surveys.list.item;
+package de.fhswf.moa.surveys.list.item.question;
 
+import de.fhswf.moa.surveys.list.item.ListItem;
 import de.fhswf.moa.surveys.model.InfoQuestion;
 
 /**

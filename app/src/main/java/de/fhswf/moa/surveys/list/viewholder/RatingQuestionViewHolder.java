@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 
 import de.fhswf.moa.surveys.R;
-import de.fhswf.moa.surveys.list.item.RatingQuestionListItem;
+import de.fhswf.moa.surveys.list.item.question.RatingQuestionListItem;
 
 public class RatingQuestionViewHolder extends BaseViewHolder<RatingQuestionListItem> {
     private TextView title;

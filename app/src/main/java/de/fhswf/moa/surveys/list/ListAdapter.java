@@ -9,22 +9,24 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import de.fhswf.moa.surveys.R;
+import de.fhswf.moa.surveys.list.item.ListItem;
+import de.fhswf.moa.surveys.list.item.SurveyListItem;
 import de.fhswf.moa.surveys.list.item.question.EndQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.InfoQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.InputQuestionListItem;
-import de.fhswf.moa.surveys.list.item.ListItem;
 import de.fhswf.moa.surveys.list.item.question.MultiQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.RatingQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.SingleQuestionListItem;
-import de.fhswf.moa.surveys.list.item.SurveyListItem;
+import de.fhswf.moa.surveys.list.item.result.SelectQuestionResultItem;
 import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
+import de.fhswf.moa.surveys.list.viewholder.SurveyListEntryViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.question.EndQuestionViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.question.InfoQuestionViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.question.InputQuestionViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.question.MultiQuestionViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.question.RatingQuestionViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.question.SingleQuestionViewHolder;
-import de.fhswf.moa.surveys.list.viewholder.SurveyListEntryViewHolder;
+import de.fhswf.moa.surveys.list.viewholder.result.SelectQuestionResultViewHolder;
 
 public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
@@ -39,51 +41,49 @@ public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         switch (viewType) {
 
             //1
             case SurveyListItem.TYPE:
                 return new SurveyListEntryViewHolder(
-                        LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.survey_item, parent, false));
+                        inflater.inflate(R.layout.survey_item, parent, false));
 
             //2
             case InfoQuestionListItem.TYPE:
                 return new InfoQuestionViewHolder(
-                        LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.question_item, parent, false));
+                        inflater.inflate(R.layout.question_item, parent, false));
 
             //3
             case InputQuestionListItem.TYPE:
                 return new InputQuestionViewHolder(
-                        LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.question_item, parent, false));
+                        inflater.inflate(R.layout.question_item, parent, false));
 
             //4
             case SingleQuestionListItem.TYPE:
                 return new SingleQuestionViewHolder(
-                        LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.question_item, parent, false));
+                        inflater.inflate(R.layout.question_item, parent, false));
 
             //5
             case MultiQuestionListItem.TYPE:
                 return new MultiQuestionViewHolder(
-                        LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.question_item, parent, false));
+                        inflater.inflate(R.layout.question_item, parent, false));
 
             //6
             case RatingQuestionListItem.TYPE:
                 return new RatingQuestionViewHolder(
-                        LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.question_item, parent, false));
+                        inflater.inflate(R.layout.question_item, parent, false));
 
             //7
             case EndQuestionListItem.TYPE:
                 return new EndQuestionViewHolder(
-                        LayoutInflater.from(parent.getContext())
-                                .inflate(R.layout.survey_end, parent, false));
+                        inflater.inflate(R.layout.survey_end, parent, false));
 
-                default:
+            case SelectQuestionResultItem.ITEM_TYPE:
+                return new SelectQuestionResultViewHolder(
+                        inflater.inflate(R.layout.question_item, parent, false));
+
+            default:
                 // Ist dat kein Problem ??
                 return null;
         }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Surveys</string>
+    <string name="num_respondents_caption">%d Antworten</string>
+    <string name="result_activity_title">Ergebnisse: %s</string>
 </resources>

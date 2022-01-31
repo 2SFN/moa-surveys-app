@@ -11,41 +11,42 @@
     android:layout_marginStart="15dp"
     android:layout_marginEnd="10dp"
     card_view:contentPadding="8dp"
-    card_view:cardCornerRadius="8dp"
+    card_view:cardCornerRadius="15dp"
     card_view:cardElevation="8dp"
     card_view:cardBackgroundColor="@color/light_green"
-    android:layout_margin="4dp" >
+    android:layout_margin="10dp" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <!--Text View over Card View-->
+        <!--Text View over Card View-->
 
         <TextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="33dp"
             android:text="Vielen Dank für Ihre Teilnahme ! \n über den Button kommen \nSie zum Ergebnis."
             android:textColor="#fff"
             android:textSize="25sp"
             card_view:layout_constraintBottom_toTopOf="@+id/resultbtn"
             card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.5"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintVertical_bias="0.897" />
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/resultbtn"
+            style="@style/ResultButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:text="Ergebnisse"
-            android:textSize="20sp"
             card_view:layout_constraintBottom_toBottomOf="parent"
             card_view:layout_constraintEnd_toEndOf="parent"
+            card_view:layout_constraintHorizontal_bias="0.5"
             card_view:layout_constraintStart_toStartOf="parent"
-            card_view:layout_constraintTop_toTopOf="parent" />
+            card_view:layout_constraintTop_toBottomOf="@+id/title" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

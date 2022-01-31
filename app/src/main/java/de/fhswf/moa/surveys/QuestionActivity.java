@@ -82,6 +82,8 @@ public class QuestionActivity extends AppCompatActivity
             // TODO: Fehler behandeln
             return;
         }
+        //
+        setTitle(survey.getTitle());
 
         for(Question c : survey.getQuestions()) {
             ListItem item;

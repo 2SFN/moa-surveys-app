@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:background="@color/light_red"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/text"
+            tools:text="Lorem ipsum dolor sit amet, consetetur sadipscing elitr..."
+            android:background="@drawable/white_bg"
+            android:padding="6dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
+    <ImageButton
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/next"
+            android:src="@drawable/ic_arrow_right"
+            android:contentDescription="@string/text_input_result_next_description"
+            app:layout_constraintTop_toBottomOf="@id/text"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="6dp"
+            />
+
+    <ImageButton
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/previous"
+            android:src="@drawable/ic_arrow_left"
+            android:contentDescription="@string/text_input_result_previous_description"
+            app:layout_constraintTop_toTopOf="@id/next"
+            app:layout_constraintEnd_toStartOf="@id/next"
+            />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/info"
+            tools:text="Result 1 of 25"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintTop_toTopOf="@id/previous"
+            app:layout_constraintBottom_toBottomOf="@id/previous"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,8 +20,6 @@ public class RatingQuestionResultViewHolder extends BaseViewHolder<RatingQuestio
     private final TextView title;
     private final TextView description;
 
-
-
     public RatingQuestionResultViewHolder(@NonNull View itemView) {
 
         super(itemView);

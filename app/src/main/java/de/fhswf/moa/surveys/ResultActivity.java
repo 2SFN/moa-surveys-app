@@ -14,6 +14,7 @@ import de.fhswf.moa.surveys.api.service.RemoteSurveyService;
 import de.fhswf.moa.surveys.api.service.SurveyService;
 import de.fhswf.moa.surveys.list.ListAdapter;
 import de.fhswf.moa.surveys.list.item.question.InfoQuestionListItem;
+import de.fhswf.moa.surveys.list.item.result.InputQuestionResultItem;
 import de.fhswf.moa.surveys.list.item.result.RatingQuestionResultItem;
 import de.fhswf.moa.surveys.list.item.result.SelectQuestionResultItem;
 import de.fhswf.moa.surveys.model.*;
@@ -78,7 +79,9 @@ public class ResultActivity extends AppCompatActivity {
                 case RATING:
                     adapter.add(new RatingQuestionResultItem((RatingQuestion) q));
                     break;
-                    // TODO: Restliche Typen
+                case INPUT:
+                    adapter.add(new InputQuestionResultItem((InputQuestion) q));
+                    break;
                 default:
                     break;
             }

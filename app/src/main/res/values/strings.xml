@@ -3,4 +3,8 @@
     <string name="num_respondents_caption">%d Antworten</string>
     <string name="result_activity_title">Ergebnisse: %s</string>
     <string name="rating_stars_label">%d Sterne</string>
+    <string name="text_input_result_next_description">Nächstes Ergebnis</string>
+    <string name="text_input_result_previous_description">Vorheriges Ergebnis</string>
+    <string name="input_results_no_results">Keine Ergebnisse</string>
+    <string name="input_results_info_label">Ergebnis %d von %d</string>
 </resources>

@@ -14,11 +14,9 @@ import de.fhswf.moa.surveys.api.service.RemoteSurveyService;
 import de.fhswf.moa.surveys.api.service.SurveyService;
 import de.fhswf.moa.surveys.list.ListAdapter;
 import de.fhswf.moa.surveys.list.item.question.InfoQuestionListItem;
+import de.fhswf.moa.surveys.list.item.result.RatingQuestionResultItem;
 import de.fhswf.moa.surveys.list.item.result.SelectQuestionResultItem;
-import de.fhswf.moa.surveys.model.InfoQuestion;
-import de.fhswf.moa.surveys.model.Question;
-import de.fhswf.moa.surveys.model.SingleSelectQuestion;
-import de.fhswf.moa.surveys.model.Survey;
+import de.fhswf.moa.surveys.model.*;
 
 public class ResultActivity extends AppCompatActivity {
 
@@ -76,6 +74,9 @@ public class ResultActivity extends AppCompatActivity {
                 case SINGLE_SELECT:
                 case MULTI_SELECT:
                     adapter.add(new SelectQuestionResultItem((SingleSelectQuestion) q));
+                    break;
+                case RATING:
+                    adapter.add(new RatingQuestionResultItem((RatingQuestion) q));
                     break;
                     // TODO: Restliche Typen
                 default:

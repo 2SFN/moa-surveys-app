@@ -1,5 +1,6 @@
 package de.fhswf.moa.surveys.list;
 
+import android.media.Rating;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -17,6 +18,7 @@ import de.fhswf.moa.surveys.list.item.question.InputQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.MultiQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.RatingQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.SingleQuestionListItem;
+import de.fhswf.moa.surveys.list.item.result.RatingQuestionResultItem;
 import de.fhswf.moa.surveys.list.item.result.SelectQuestionResultItem;
 import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.SurveyListEntryViewHolder;
@@ -26,6 +28,7 @@ import de.fhswf.moa.surveys.list.viewholder.question.InputQuestionViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.question.MultiQuestionViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.question.RatingQuestionViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.question.SingleQuestionViewHolder;
+import de.fhswf.moa.surveys.list.viewholder.result.RatingQuestionResultViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.result.SelectQuestionResultViewHolder;
 
 public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
@@ -81,6 +84,10 @@ public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
             case SelectQuestionResultItem.ITEM_TYPE:
                 return new SelectQuestionResultViewHolder(
+                        inflater.inflate(R.layout.question_item, parent, false));
+
+            case RatingQuestionResultItem.ITEM_TYPE:
+                return new RatingQuestionResultViewHolder(
                         inflater.inflate(R.layout.question_item, parent, false));
 
             default:

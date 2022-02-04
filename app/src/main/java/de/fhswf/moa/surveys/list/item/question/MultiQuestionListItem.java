@@ -19,7 +19,7 @@ public class MultiQuestionListItem implements ListItem, QuestionResultItem{
     public static final int TYPE = 5;
 
     private MultiSelectQuestion question;
-    //TODO Typ besprechen
+
     private ArrayList<String> userInput;
 
     public MultiQuestionListItem(MultiSelectQuestion question) {

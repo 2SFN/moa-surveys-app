@@ -58,41 +58,6 @@ public class MultiQuestionViewHolder extends BaseViewHolder<MultiQuestionListIte
 
             container.addView(checkBox);
         }
-            /*
-            RadioButton radioButton = new RadioButton(container.getContext());
-            radioButton.setText(c);
-            radioButton.setOnClickListener(new View.OnClickListener() {
-                /*
-                Soll bei checked RadioButton den Namen des Buttons hinzufügen zu
-                Userinput, außer dieser ist schon vorhanden in Userinput.
-                Bei Unchecked RadioButton soll geguckt werden ob der
-                Unchecked button in Userinput ist, wenn ja wird er daraus gelöscht
-
-                @Override
-                public void onClick(View v) {
-                    if (radioButton.isChecked() == true){
-
-                        CharSequence c = radioButton.getText();
-                        if(userinput.contains(c) != true ) {
-                            userinput.add(c.toString());
-                            item.setUserInput(userinput);
-                        }
-                    } else if(radioButton.isChecked() != true){
-                        CharSequence c = radioButton.getText();
-                        if(userinput.contains(c) == true){
-                            userinput.remove(c);
-                        }
-                    }
-                }
-                container.addView(radioButton);
-            });
-
-             */
-
-            //TODO Weg finden um Radiobutton.isChecked() nutzen zu können
-            //https://stackoverflow.com/questions/24992936/how-to-check-if-a-radiobutton-is-checked-in-a-radiogroup-in-android
-
-
 
     }
 }

@@ -17,7 +17,7 @@ public class SingleQuestionListItem implements ListItem, QuestionResultItem {
     public static final int TYPE = 4;
 
     private SingleSelectQuestion question;
-    //TODO Datentyp besprechen, könnte RadiobtnID sein(int), könnte Radiobutton Name sein.
+
     private String userInput;
 
     public SingleQuestionListItem(SingleSelectQuestion question) {

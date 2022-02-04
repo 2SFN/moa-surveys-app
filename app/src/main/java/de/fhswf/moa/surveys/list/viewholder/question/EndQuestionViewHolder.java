@@ -1,8 +1,7 @@
 package de.fhswf.moa.surveys.list.viewholder.question;
 
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 
@@ -10,31 +9,28 @@ import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.EndQuestionListItem;
 import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
 
-public class EndQuestionViewHolder extends BaseViewHolder<EndQuestionListItem> implements View.OnClickListener {
+public class EndQuestionViewHolder extends BaseViewHolder<EndQuestionListItem> {
 
-    private TextView title;
-
-    private Button results;
-    private EndQuestionListItem currentEndQuestion;
+    private final ImageButton results;
+    private final ImageButton submit;
 
     public EndQuestionViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.title = itemView.findViewById(R.id.title);
-        this.results = itemView.findViewById(R.id.resultbtn);
-        results.setOnClickListener(this);
+
+        this.results = itemView.findViewById(R.id.results);
+        this.submit = itemView.findViewById(R.id.submit);
     }
 
     @Override
     public void bind(EndQuestionListItem item) {
-        this.currentEndQuestion = item;
-        title.setText(item.getQuestion().getTitle());
+        results.setOnClickListener(v -> {
+            if(item.getOnResultsClickListener() != null)
+                item.getOnResultsClickListener().onResultsClick();
+        });
 
-        // TODO Möglichkeit widgets  hinzufügen
-    }
-
-    @Override
-    public void onClick(View v) {
-        if(currentEndQuestion.getOnEndListener() != null)
-            currentEndQuestion.getOnEndListener().onEndButtonClick(currentEndQuestion);
+        submit.setOnClickListener(v -> {
+            if(item.getOnEndListener() != null)
+                item.getOnEndListener().onEndButtonClick(item);
+        });
     }
 }

@@ -1,38 +1,31 @@
 package de.fhswf.moa.surveys.list.item.question;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import de.fhswf.moa.surveys.list.item.ListItem;
-import de.fhswf.moa.surveys.model.EndQuestion;
 
 /**
  * Wrapper Class für EndQuestion
+ *
  * @author Joey F.M. Esteves
  */
 public class EndQuestionListItem implements ListItem {
     public static final int TYPE = 7;
 
-    private EndQuestion question;
-    private OnEndListener onEndListener;
+    private @Nullable OnEndClickListener onEndListener;
+    private @Nullable OnResultsClickListener onResultsClickListener;
 
     //Konstruktor
-    public EndQuestionListItem(EndQuestion question) {
-        this.question = question;
-    }
-
-    /**
-     * Getter EndQuestion
-     * @return question
-     */
-    public EndQuestion getQuestion() {
-        return question;
+    public EndQuestionListItem() {
     }
 
     /**
      * Getter Listener
      * @return onEndListener
      */
-    public OnEndListener getOnEndListener() {
+    @Nullable
+    public OnEndClickListener getOnEndListener() {
         return onEndListener;
     }
 
@@ -40,9 +33,20 @@ public class EndQuestionListItem implements ListItem {
      * Setter Listener
      * @param onEndListener
      */
-    //TODO ist dieser Setter Falsch ? vgl. Survey setter
-    public EndQuestionListItem setOnEndListener(OnEndListener onEndListener) {
+    public EndQuestionListItem setOnEndListener(
+            @Nullable OnEndClickListener onEndListener) {
         this.onEndListener = onEndListener;
+        return this;
+    }
+
+    @Nullable
+    public OnResultsClickListener getOnResultsClickListener() {
+        return onResultsClickListener;
+    }
+
+    public EndQuestionListItem setOnResultsClickListener(
+            @Nullable OnResultsClickListener onResultsClickListener) {
+        this.onResultsClickListener = onResultsClickListener;
         return this;
     }
 
@@ -52,11 +56,16 @@ public class EndQuestionListItem implements ListItem {
     }
 
     /**
-     * Interface Listener für Button auf EndQuestion Item.
+     * Interface Listener für Umfrage-Beenden-Button auf EndQuestion Item.
      */
-    public interface OnEndListener{
+    public interface OnEndClickListener {
         void onEndButtonClick(@NonNull EndQuestionListItem item );
+    }
 
-
+    /**
+     * Callback für den Ergebnisse-Anzeigen-Button.
+     */
+    public interface OnResultsClickListener {
+        void onResultsClick();
     }
 }

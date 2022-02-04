@@ -20,15 +20,14 @@ import org.json.JSONObject;
 import de.fhswf.moa.surveys.api.service.RemoteSurveyService;
 import de.fhswf.moa.surveys.api.service.SurveyService;
 import de.fhswf.moa.surveys.list.ListAdapter;
+import de.fhswf.moa.surveys.list.item.ListItem;
 import de.fhswf.moa.surveys.list.item.question.EndQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.InfoQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.InputQuestionListItem;
-import de.fhswf.moa.surveys.list.item.ListItem;
 import de.fhswf.moa.surveys.list.item.question.MultiQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.QuestionResultItem;
 import de.fhswf.moa.surveys.list.item.question.RatingQuestionListItem;
 import de.fhswf.moa.surveys.list.item.question.SingleQuestionListItem;
-import de.fhswf.moa.surveys.model.EndQuestion;
 import de.fhswf.moa.surveys.model.InfoQuestion;
 import de.fhswf.moa.surveys.model.InputQuestion;
 import de.fhswf.moa.surveys.model.MultiSelectQuestion;
@@ -37,8 +36,9 @@ import de.fhswf.moa.surveys.model.RatingQuestion;
 import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 import de.fhswf.moa.surveys.model.Survey;
 
-public class QuestionActivity extends AppCompatActivity
-        implements EndQuestionListItem.OnEndListener {
+public class QuestionActivity extends AppCompatActivity implements
+        EndQuestionListItem.OnEndClickListener,
+        EndQuestionListItem.OnResultsClickListener {
 
     private String SurveyID;
     private Survey survey;
@@ -47,7 +47,7 @@ public class QuestionActivity extends AppCompatActivity
     private ListAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // ID des Survey aus dem Intent entnehmen und in einem String speichern
@@ -58,7 +58,7 @@ public class QuestionActivity extends AppCompatActivity
         setContentView(R.layout.question_view);
         RecyclerView container = findViewById(R.id.question_container);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this,RecyclerView.HORIZONTAL,false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
         container.setLayoutManager(layoutManager);
 
         SnapHelper snapHelper = new PagerSnapHelper();
@@ -79,7 +79,8 @@ public class QuestionActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
+        // Actionbar-Menü-Eintrag, mit dem man direkt zu den Ergebnissen springen kann
+        // (Icon analog zur End-Card)
         menu.add("Direkt zu den Ergebnissen")
                 .setOnMenuItemClickListener(m -> {
                     openResults();
@@ -90,17 +91,22 @@ public class QuestionActivity extends AppCompatActivity
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Aufgerufen, wenn der SurveyService die Survey erfolgreich abgerufen hat.
+     *
+     * @param result Survey mit Details.
+     */
     private void handleSurveyResult(Survey result) {
         this.survey = result;
 
-        if(survey.getQuestions() == null) {
+        if (survey.getQuestions() == null) {
             // TODO: Fehler behandeln
             return;
         }
         //
         setTitle(survey.getTitle());
 
-        for(Question c : survey.getQuestions()) {
+        for (Question c : survey.getQuestions()) {
             ListItem item;
             switch (c.getType()) {
                 case INFO:
@@ -126,9 +132,9 @@ public class QuestionActivity extends AppCompatActivity
         }
 
         // TODO: End-Card anpassen
-        adapter.add(new EndQuestionListItem(new EndQuestion(
-                "", "Fertig :)"))
-                .setOnEndListener(this));
+        adapter.add(new EndQuestionListItem()
+                .setOnEndListener(this)
+                .setOnResultsClickListener(this));
     }
 
     private void handleError(Throwable e) {
@@ -146,10 +152,10 @@ public class QuestionActivity extends AppCompatActivity
             // I. Ergebnisse übermitteln
             JSONArray results = new JSONArray();
 
-            for(ListItem c : adapter.getItems()) {
-                if(c instanceof QuestionResultItem) {
+            for (ListItem c : adapter.getItems()) {
+                if (c instanceof QuestionResultItem) {
                     JSONObject res = ((QuestionResultItem) c).getResult();
-                    if(res != null)
+                    if (res != null)
                         results.put(res);
                 }
             }
@@ -176,9 +182,14 @@ public class QuestionActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public void onResultsClick() {
+        openResults();
+    }
+
     private void openResults() {
-        Intent intent = new Intent(this,ResultActivity.class);
-        intent.putExtra("ID",SurveyID);
+        Intent intent = new Intent(this, ResultActivity.class);
+        intent.putExtra("ID", SurveyID);
         startActivity(intent);
         finish();
     }

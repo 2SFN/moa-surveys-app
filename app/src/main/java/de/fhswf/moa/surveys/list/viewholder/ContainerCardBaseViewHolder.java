@@ -12,7 +12,6 @@ import androidx.cardview.widget.CardView;
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.QuestionListItem;
 import de.fhswf.moa.surveys.util.ColorGenerator;
-import de.fhswf.moa.surveys.util.DimensionsUtil;
 
 public abstract class ContainerCardBaseViewHolder<T extends QuestionListItem>
         extends BaseViewHolder<T> {
@@ -42,10 +41,7 @@ public abstract class ContainerCardBaseViewHolder<T extends QuestionListItem>
     @Override
     public void bind(T item) {
         // Hintergrundfarbe der Karte setzten
-        card.setBackgroundColor(ColorGenerator.MATERIAL.getColor(item.getQuestion()));
-
-        // TODO: Dimens resource
-        card.setRadius(DimensionsUtil.dpToPx(getContext().getResources(), 16.0f));
+        card.setCardBackgroundColor(ColorGenerator.MATERIAL.getColor(item.getQuestion()));
 
         // Standard-Views und Container leeren
         container.removeAllViews();

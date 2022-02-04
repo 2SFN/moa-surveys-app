@@ -80,7 +80,7 @@ public class QuestionActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        menu.add("Ergebnisse")
+        menu.add("Direkt zu den Ergebnissen")
                 .setOnMenuItemClickListener(m -> {
                     openResults();
                     return true;

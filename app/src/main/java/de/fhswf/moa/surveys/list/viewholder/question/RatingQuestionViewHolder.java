@@ -7,6 +7,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.ContextThemeWrapper;
 
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.RatingQuestionListItem;
@@ -33,15 +34,18 @@ public class RatingQuestionViewHolder extends BaseViewHolder<RatingQuestionListI
         container.removeAllViews();
 
         // TODO Rating hinzufügen
-        RatingBar ratingBar = new RatingBar(container.getContext());
+        RatingBar ratingBar = new RatingBar(new ContextThemeWrapper(
+                container.getContext(), R.style.WhiteRatingBar));
         ratingBar.setStepSize(1F);
         ratingBar.setNumStars(5);
+
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                 item.setUserInput(rating);
             }
         });
+
         container.addView(ratingBar);
 
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ratingBar.getLayoutParams();

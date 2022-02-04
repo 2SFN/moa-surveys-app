@@ -180,5 +180,6 @@ public class QuestionActivity extends AppCompatActivity
         Intent intent = new Intent(this,ResultActivity.class);
         intent.putExtra("ID",SurveyID);
         startActivity(intent);
+        finish();
     }
 }

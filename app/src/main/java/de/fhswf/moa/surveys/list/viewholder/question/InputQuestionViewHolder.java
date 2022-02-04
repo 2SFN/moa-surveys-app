@@ -29,6 +29,7 @@ public class InputQuestionViewHolder extends ContainerCardBaseViewHolder<InputQu
         textInputEditText.setBackgroundResource(R.drawable.white_bg);
         int editTextPadding = (int) DimensionsUtil.dpToPx(textInputEditText.getResources(), 12);
         textInputEditText.setPadding(editTextPadding, editTextPadding, editTextPadding, editTextPadding);
+        textInputEditText.setHint("Antwort eingeben");
 
         textInputEditText.addTextChangedListener(new TextWatcher() {
             @Override

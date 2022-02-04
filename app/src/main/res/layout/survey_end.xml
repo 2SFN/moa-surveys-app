@@ -23,13 +23,15 @@
 
         <TextView
             android:id="@+id/title"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Vielen Dank für die Teilnahme!\n\nSie können Ihre Ergebnisse absenden, oder sich nur die Ergebnisse anschauen."
             android:textAlignment="center"
             android:textColor="#fff"
             android:textSize="25sp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
             app:layout_constraintBottom_toTopOf="@+id/results"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

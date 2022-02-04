@@ -13,7 +13,6 @@ import androidx.annotation.NonNull;
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.SingleQuestionListItem;
 import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
-import de.fhswf.moa.surveys.util.DimensionsUtil;
 
 public class SingleQuestionViewHolder extends BaseViewHolder<SingleQuestionListItem> {
 
@@ -43,7 +42,7 @@ public class SingleQuestionViewHolder extends BaseViewHolder<SingleQuestionListI
         ViewGroup.MarginLayoutParams marginparams = new ViewGroup.MarginLayoutParams(
                 ViewGroup.MarginLayoutParams.MATCH_PARENT,
                 ViewGroup.MarginLayoutParams.MATCH_PARENT);
-        marginparams.topMargin = (int) DimensionsUtil.dpToPx(container.getResources(), 16.0f);
+        //marginparams.topMargin = (int) DimensionsUtil.dpToPx(container.getResources(), 16.0f);
         radioGroup.setLayoutParams(marginparams);
 //TODO Test this method
 

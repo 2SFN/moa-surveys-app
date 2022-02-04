@@ -5,14 +5,14 @@ import androidx.annotation.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.fhswf.moa.surveys.list.item.ListItem;
+import de.fhswf.moa.surveys.list.item.QuestionListItem;
 import de.fhswf.moa.surveys.model.InputQuestion;
 
 /**
  * Wrapper Class für InputQuestion
  * @author Joey F.M. Esteves
  */
-public class InputQuestionListItem implements ListItem, QuestionResultItem {
+public class InputQuestionListItem implements QuestionListItem, QuestionResultItem {
     public static final int TYPE = 3;
 
     private InputQuestion question;
@@ -26,6 +26,7 @@ public class InputQuestionListItem implements ListItem, QuestionResultItem {
      * Getter für InputQuestion
      * @return question
      */
+    @Override
     public InputQuestion getQuestion() {
         return question;
     }

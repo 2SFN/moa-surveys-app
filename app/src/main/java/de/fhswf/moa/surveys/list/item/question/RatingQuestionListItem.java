@@ -5,14 +5,15 @@ import androidx.annotation.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.fhswf.moa.surveys.list.item.ListItem;
+import de.fhswf.moa.surveys.list.item.QuestionListItem;
 import de.fhswf.moa.surveys.model.RatingQuestion;
 
 /**
  * Wrapper Class für RatingQuestion
+ *
  * @author Joey F.M. Esteves
  */
-public class RatingQuestionListItem implements ListItem, QuestionResultItem{
+public class RatingQuestionListItem implements QuestionListItem, QuestionResultItem{
     public static final int TYPE = 6;
 
     private RatingQuestion question;
@@ -22,6 +23,7 @@ public class RatingQuestionListItem implements ListItem, QuestionResultItem{
         this.question = question;
     }
 
+    @Override
     public RatingQuestion getQuestion() {
         return question;
     }

@@ -3,45 +3,34 @@ package de.fhswf.moa.surveys.list.viewholder.question;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
-import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.MultiQuestionListItem;
-import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
+import de.fhswf.moa.surveys.list.viewholder.ContainerCardBaseViewHolder;
 
-public class MultiQuestionViewHolder extends BaseViewHolder<MultiQuestionListItem> {
-    private TextView title;
-    private TextView description;
-    private LinearLayout container;
+public class MultiQuestionViewHolder extends ContainerCardBaseViewHolder<MultiQuestionListItem> {
+
     private ArrayList<String> userinput;
 
     public MultiQuestionViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.title = itemView.findViewById(R.id.title);
-        this.description = itemView.findViewById(R.id.description);
-        this.container = itemView.findViewById(R.id.container);
     }
 
     @Override
     public void bind(MultiQuestionListItem item){
-        userinput = new ArrayList<>();
-        title.setText(item.getQuestion().getTitle());
-        description.setText(item.getQuestion().getDescription());
+        super.bind(item);
 
-        // Sicherheitsmassnahme
-        container.removeAllViews();
+        userinput = new ArrayList<>();
 
         /*
          Erstellt RadioButtons ohne RadioGroup, damit mehrere ausgewählt werden
          können
         */
         for(String c : item.getQuestion().getOptions()) {
-            CheckBox checkBox = new CheckBox(container.getContext());
+            CheckBox checkBox = new CheckBox(getContext());
             checkBox.setText(c);
             checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
@@ -56,7 +45,7 @@ public class MultiQuestionViewHolder extends BaseViewHolder<MultiQuestionListIte
                 }
             });
 
-            container.addView(checkBox);
+            addContentView(checkBox);
         }
 
     }

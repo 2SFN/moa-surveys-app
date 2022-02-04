@@ -6,14 +6,15 @@ import androidx.annotation.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import de.fhswf.moa.surveys.list.item.ListItem;
+import de.fhswf.moa.surveys.list.item.QuestionListItem;
 import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 
 /**
  * Wrapper Class für SingleSelectQuestion
+ *
  * @author  Joey F.M. Esteves , Konzept SFN
  */
-public class SingleQuestionListItem implements ListItem, QuestionResultItem {
+public class SingleQuestionListItem implements QuestionListItem, QuestionResultItem {
     public static final int TYPE = 4;
 
     private SingleSelectQuestion question;
@@ -28,6 +29,7 @@ public class SingleQuestionListItem implements ListItem, QuestionResultItem {
      * Getter für SingleSelectQuestion
      * @return question
      */
+    @Override
     public SingleSelectQuestion getQuestion() {
         return question;
     }

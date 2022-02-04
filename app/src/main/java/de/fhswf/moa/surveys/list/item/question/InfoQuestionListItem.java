@@ -1,14 +1,15 @@
 package de.fhswf.moa.surveys.list.item.question;
 
-import de.fhswf.moa.surveys.list.item.ListItem;
+import de.fhswf.moa.surveys.list.item.QuestionListItem;
 import de.fhswf.moa.surveys.model.InfoQuestion;
 
 /**
  * Wrapper Class für InfoQuestion
  * @author  Joey F.M. Esteves
  */
-public class InfoQuestionListItem implements ListItem {
+public class InfoQuestionListItem implements QuestionListItem {
     public static final int TYPE = 2;
+
     private InfoQuestion question;
 
     //Konstruktor
@@ -20,6 +21,7 @@ public class InfoQuestionListItem implements ListItem {
      * Getter InfoQuestion
      * @return question
      */
+    @Override
     public InfoQuestion getQuestion() {
         return question;
     }

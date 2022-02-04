@@ -8,14 +8,14 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import de.fhswf.moa.surveys.list.item.ListItem;
+import de.fhswf.moa.surveys.list.item.QuestionListItem;
 import de.fhswf.moa.surveys.model.MultiSelectQuestion;
 
 /**
  * Wrapper Class für MultiSelectQuestion
  * @author Joey F.M. Esteves
  */
-public class MultiQuestionListItem implements ListItem, QuestionResultItem{
+public class MultiQuestionListItem implements QuestionListItem, QuestionResultItem{
     public static final int TYPE = 5;
 
     private MultiSelectQuestion question;
@@ -30,6 +30,7 @@ public class MultiQuestionListItem implements ListItem, QuestionResultItem{
      * Getter MultiSelectQuestion
      * @return question
      */
+    @Override
     public MultiSelectQuestion getQuestion() {
         return question;
     }

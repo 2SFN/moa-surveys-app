@@ -1,5 +1,6 @@
 package de.fhswf.moa.surveys.list.item.question;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import org.json.JSONArray;
@@ -40,7 +41,11 @@ public class MultiQuestionListItem implements QuestionListItem, QuestionResultIt
         return TYPE;
     }
 
+    @NonNull
     public ArrayList<String> getUserInput() {
+        if(this.userInput == null)
+            userInput = new ArrayList<>();
+
         return userInput;
     }
 

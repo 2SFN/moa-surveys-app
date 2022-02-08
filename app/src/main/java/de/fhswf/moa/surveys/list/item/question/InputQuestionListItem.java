@@ -56,7 +56,7 @@ public class InputQuestionListItem implements QuestionListItem, QuestionResultIt
 		}
          */
 
-        if(userInput != null) {
+        if(userInput != null && !userInput.trim().isEmpty()) {
             return new JSONObject()
                     .put("type", question.getType().getValue())
                     .put("id", question.getId())

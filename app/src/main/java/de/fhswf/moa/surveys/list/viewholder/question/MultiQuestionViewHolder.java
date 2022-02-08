@@ -8,47 +8,46 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 
-import java.util.ArrayList;
-
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.MultiQuestionListItem;
 import de.fhswf.moa.surveys.list.viewholder.ContainerCardBaseViewHolder;
 
 public class MultiQuestionViewHolder extends ContainerCardBaseViewHolder<MultiQuestionListItem> {
 
-    private ArrayList<String> userinput;
-
     public MultiQuestionViewHolder(@NonNull View itemView) {
         super(itemView);
     }
 
     @Override
-    public void bind(MultiQuestionListItem item){
+    public void bind(MultiQuestionListItem item) {
         super.bind(item);
 
-        userinput = new ArrayList<>();
+        // Checked-Change Listener für die Checkboxes
+        CompoundButton.OnCheckedChangeListener checkedChangeListener = (buttonView, isChecked) -> {
+            if (isChecked) {
+                item.getUserInput().add(buttonView.getText().toString());
+            } else {
+                item.getUserInput().remove(buttonView.getText().toString());
+            }
+        };
 
         /*
          Erstellt RadioButtons ohne RadioGroup, damit mehrere ausgewählt werden
          können
         */
-        for(String c : item.getQuestion().getOptions()) {
+        for (String c : item.getQuestion().getOptions()) {
+            // Neues CheckBox-View
             CheckBox checkBox = new CheckBox(new ContextThemeWrapper(
                     getContext(), R.style.WhiteCheckedButtons));
             checkBox.setText(c);
             checkBox.setTextColor(Color.WHITE);
-            checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if (checkBox.isChecked()) {
-                        userinput.add(checkBox.getText().toString());
-                    } else if (!checkBox.isChecked()) {
-                        userinput.remove(checkBox.getText().toString());
-                    }
 
-                    item.setUserInput(userinput);
-                }
-            });
+            // Prüfen, ob der Nutzer diese CheckBox vorher schon ausgewählt hatte
+            if (item.getUserInput().contains(c)) {
+                checkBox.setChecked(true);
+            }
+
+            checkBox.setOnCheckedChangeListener(checkedChangeListener);
 
             addContentView(checkBox);
         }

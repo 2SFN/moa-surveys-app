@@ -25,6 +25,12 @@ public class InputQuestionViewHolder extends ContainerCardBaseViewHolder<InputQu
         // Eingabe-Text-Feld
         TextInputEditText textInputEditText = new TextInputEditText(getContext());
 
+        // Sollte der Nutzer bereits Text eingegeben haben, wird dieser hier
+        // "wiederhergestellt"
+        if(item.getUserInput() != null) {
+            textInputEditText.setText(item.getUserInput());
+        }
+
         // Styles
         textInputEditText.setBackgroundResource(R.drawable.white_bg);
         int editTextPadding = (int) DimensionsUtil.dpToPx(textInputEditText.getResources(), 12);

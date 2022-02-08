@@ -37,6 +37,10 @@ public class SingleQuestionViewHolder extends ContainerCardBaseViewHolder<Single
             radioButton.setTextColor(Color.WHITE);
             radioButton.setOnCheckedChangeListener(checkedChangeListener);
 
+            if(c.equals(item.getUserInput())) {
+                radioButton.setChecked(true);
+            }
+
             radioGroup.addView(radioButton);
         }
 

@@ -22,10 +22,16 @@ public class RatingQuestionViewHolder extends ContainerCardBaseViewHolder<Rating
     public void bind(RatingQuestionListItem item) {
         super.bind(item);
 
+        // Neues RatingBar-View
         RatingBar ratingBar = new RatingBar(new ContextThemeWrapper(
                 getContext(), R.style.WhiteRatingBar));
         ratingBar.setStepSize(1F);
         ratingBar.setNumStars(5);
+
+        // Hat der Nutzer bereits eine Bewertung ausgewählt?
+        if(item.getUserInput() != null) {
+            ratingBar.setRating(item.getUserInput());
+        }
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override

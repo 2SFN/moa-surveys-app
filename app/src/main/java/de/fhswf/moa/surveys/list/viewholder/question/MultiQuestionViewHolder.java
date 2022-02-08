@@ -8,9 +8,12 @@ import android.widget.CompoundButton;
 import androidx.annotation.NonNull;
 import androidx.appcompat.view.ContextThemeWrapper;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.MultiQuestionListItem;
 import de.fhswf.moa.surveys.list.viewholder.ContainerCardBaseViewHolder;
+import de.fhswf.moa.surveys.model.MultiSelectQuestion;
 
 public class MultiQuestionViewHolder extends ContainerCardBaseViewHolder<MultiQuestionListItem> {
 
@@ -29,6 +32,8 @@ public class MultiQuestionViewHolder extends ContainerCardBaseViewHolder<MultiQu
             } else {
                 item.getUserInput().remove(buttonView.getText().toString());
             }
+
+            updateCheckBoxStyle(item.getQuestion().getMaxSelectedOptions());
         };
 
         /*
@@ -52,5 +57,52 @@ public class MultiQuestionViewHolder extends ContainerCardBaseViewHolder<MultiQu
             addContentView(checkBox);
         }
 
+        updateCheckBoxStyle(item.getQuestion().getMaxSelectedOptions());
+
+    }
+
+    /**
+     * Überprüft die Anzahl der ausgewählten CheckBoxes und passt die Views in dem
+     * Container entsprechend an.
+     *
+     * Ist die maximal zulässige Anzahl an gleichzeitig ausgewählten Optionen erreicht
+     * (s. {@link MultiSelectQuestion#getMaxSelectedOptions()}), dann werden die restlichen
+     * Optionen deaktiviert; es können also nur noch bereits ausgewählte wieder abgewählt werden.
+     *
+     * @param maxSelected Anzahl der gleichzeitig auswählbaren Optionen.
+     */
+    private void updateCheckBoxStyle(int maxSelected) {
+        // Zähle ausgewählte CheckBoxes
+        AtomicInteger selected = new AtomicInteger();
+        checkBoxForEach(e -> {
+            if(e.isChecked())
+                selected.getAndIncrement();
+        });
+
+        // Vergleiche mit maximal erlaubter Anzahl
+        if ((maxSelected == MultiSelectQuestion.NO_SELECTION_LIMIT) || (selected.get() < maxSelected)) {
+            // Die maximale Anzahl von ausgewählten CheckBoxes ist nicht erreicht
+            // >> Alle CheckBoxes aktivieren
+            checkBoxForEach(e -> e.setEnabled(true));
+        } else {
+            // Maximale Anzahl erreicht >> Deaktiviere _nicht_ ausgewählte CheckBoxes
+            checkBoxForEach(e -> {
+                if(!e.isChecked())
+                    e.setEnabled(false);
+            });
+        }
+    }
+
+    private void checkBoxForEach(CompoundButtonAction action) {
+        for (int i = 0; i < getContainer().getChildCount(); i++) {
+            View child = getContainer().getChildAt(i);
+
+            if (child instanceof CompoundButton)
+                action.process((CompoundButton) child);
+        }
+    }
+
+    private interface CompoundButtonAction {
+        void process(@NonNull CompoundButton e);
     }
 }

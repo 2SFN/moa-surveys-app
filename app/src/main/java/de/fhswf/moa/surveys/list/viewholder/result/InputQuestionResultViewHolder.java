@@ -75,7 +75,13 @@ public class InputQuestionResultViewHolder
 
             // Button-Sichtbarkeit abhängig von Position
             if(item.getResultPosition() == 0) {
-                next.setVisibility(View.VISIBLE);
+                // Genau 1 Ergebnis >> Gar keine Buttons anzeigen
+                if(item.getQuestion().getResults().size() == 1) {
+                    next.setVisibility(View.INVISIBLE);
+                } else {
+                    next.setVisibility(View.VISIBLE);
+                }
+
                 prev.setVisibility(View.INVISIBLE);
             } else if(item.getResultPosition() == (item.getQuestion().getResults().size() - 1)) {
                 next.setVisibility(View.INVISIBLE);

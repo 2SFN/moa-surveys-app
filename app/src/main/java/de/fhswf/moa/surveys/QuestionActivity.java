@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,8 @@ import androidx.recyclerview.widget.SnapHelper;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Locale;
 
 import de.fhswf.moa.surveys.api.service.RemoteSurveyService;
 import de.fhswf.moa.surveys.api.service.SurveyService;
@@ -35,6 +38,7 @@ import de.fhswf.moa.surveys.model.Question;
 import de.fhswf.moa.surveys.model.RatingQuestion;
 import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 import de.fhswf.moa.surveys.model.Survey;
+import de.fhswf.moa.surveys.util.CirclePagerIndicatorDecoration;
 
 public class QuestionActivity extends AppCompatActivity implements
         EndQuestionListItem.OnEndClickListener,
@@ -45,6 +49,8 @@ public class QuestionActivity extends AppCompatActivity implements
 
     private SurveyService surveyService;
     private ListAdapter adapter;
+    private TextView progressText;
+    private LinearLayoutManager layoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +64,8 @@ public class QuestionActivity extends AppCompatActivity implements
         setContentView(R.layout.question_view);
         RecyclerView container = findViewById(R.id.question_container);
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false);
+        layoutManager = new LinearLayoutManager(
+                this, RecyclerView.HORIZONTAL, false);
         container.setLayoutManager(layoutManager);
 
         SnapHelper snapHelper = new PagerSnapHelper();
@@ -67,6 +74,12 @@ public class QuestionActivity extends AppCompatActivity implements
         //Recyclerview Adapter anfügen
         adapter = new ListAdapter();
         container.setAdapter(adapter);
+
+        // Page Indicator
+        container.addItemDecoration(new CirclePagerIndicatorDecoration());
+        this.progressText = findViewById(R.id.progress);
+        container.addOnScrollListener(new IndicatorScrollListener());
+        updateProgressText();
 
         this.surveyService = new RemoteSurveyService(this);
         surveyService.fetchSurveyDetails(
@@ -103,7 +116,8 @@ public class QuestionActivity extends AppCompatActivity implements
             // TODO: Fehler behandeln
             return;
         }
-        //
+
+        // Titel der Activity
         setTitle(survey.getTitle());
 
         for (Question c : survey.getQuestions()) {
@@ -131,10 +145,13 @@ public class QuestionActivity extends AppCompatActivity implements
             adapter.add(item);
         }
 
-        // TODO: End-Card anpassen
+        // End-Card einfügen
         adapter.add(new EndQuestionListItem()
                 .setOnEndListener(this)
                 .setOnResultsClickListener(this));
+
+        // Fortschritts-Text aktualisieren
+        updateProgressText();
     }
 
     private void handleError(Throwable e) {
@@ -192,5 +209,28 @@ public class QuestionActivity extends AppCompatActivity implements
         intent.putExtra("ID", SurveyID);
         startActivity(intent);
         finish();
+    }
+
+    /**
+     * Aktualisiert den Fortschritts-Text am unteren Bildschirmrand.
+     */
+    private void updateProgressText() {
+        // Position ermitteln
+        int position = layoutManager.findFirstVisibleItemPosition() + 1;
+        if(position == 0) position = 1;
+
+        // Text aktualisieren
+        String label = String.format(Locale.getDefault(),
+                getString(R.string.question_activity_progress_label),
+                position, adapter.getItemCount());
+        progressText.setText(label);
+    }
+
+    private class IndicatorScrollListener extends RecyclerView.OnScrollListener {
+        @Override
+        public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+            super.onScrollStateChanged(recyclerView, newState);
+            updateProgressText();
+        }
     }
 }

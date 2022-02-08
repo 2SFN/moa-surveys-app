@@ -7,4 +7,5 @@
     <string name="text_input_result_previous_description">Vorheriges Ergebnis</string>
     <string name="input_results_no_results">Keine Ergebnisse</string>
     <string name="input_results_info_label">Ergebnis %d von %d</string>
+    <string name="question_activity_progress_label">%d out of %d</string>
 </resources>

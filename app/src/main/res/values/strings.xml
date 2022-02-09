@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Surveys</string>
-    <string name="num_respondents_caption">%d Antworten</string>
-    <string name="result_activity_title">Ergebnisse: %s</string>
-    <string name="rating_stars_label">%d Sterne</string>
-    <string name="text_input_result_next_description">Nächstes Ergebnis</string>
-    <string name="text_input_result_previous_description">Vorheriges Ergebnis</string>
-    <string name="input_results_no_results">Keine Ergebnisse</string>
-    <string name="input_results_info_label">Ergebnis %d von %d</string>
+    <string name="num_respondents_caption">%d Answers</string>
+    <string name="result_activity_title">Results: %s</string>
+    <string name="rating_stars_label">%d Stars</string>
+    <string name="text_input_result_next_description">Next Result</string>
+    <string name="text_input_result_previous_description">Previous Result</string>
+    <string name="input_results_no_results">No Results</string>
+    <string name="input_results_info_label">Result %d out of %d</string>
     <string name="question_activity_progress_label">%d out of %d</string>
-    <string name="survey_end_message">Vielen Dank für die Teilnahme!\n\nSie können Ihre Ergebnisse absenden, oder sich nur die Ergebnisse anschauen.</string>
-    <string name="survey_end_results_button_description">Direkt zu den Ergebnissen</string>
-    <string name="survey_end_submit_button_description">Eingaben senden und Ergebnisse anzeigen</string>
-    <string name="survey_end_results_button">Ergebnisse anzeigen (Eingaben werden verworfen)</string>
-    <string name="survey_end_submit_button">Eingaben senden und Ergebnisse anzeigen</string>
-    <string name="questions_menu_results">Direkt zu den Ergebnissen</string>
-    <string name="input_question_hint">Antwort eingeben</string>
+    <string name="survey_end_message">Thank you for your participation!\n\n You can send your answers, or only look at the results.</string>
+    <string name="survey_end_results_button_description">Directly to results</string>
+    <string name="survey_end_submit_button_description">Send input and show results</string>
+    <string name="survey_end_results_button">show results (input will be discarded)</string>
+    <string name="survey_end_submit_button">Send input and show results</string>
+    <string name="questions_menu_results">Directly to results</string>
+    <string name="input_question_hint">Input answer</string>
 </resources>

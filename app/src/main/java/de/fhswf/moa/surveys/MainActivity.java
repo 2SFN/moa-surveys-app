@@ -45,18 +45,10 @@ public class MainActivity extends AppCompatActivity implements SurveyListItem.On
 //        this.surveyService = new MockSurveyService();   Mock-Version
 
         // Daten von Service laden
-
         surveyService.fetchSurveyList(
                 this::addSurveysToList,
                 this::showErrorDialog
         );
-        /*
-        surveyService.fetchSurveyList(
-                this::addSurveysToList,
-                this::showErrorDialog
-        );
-
-         */
     }
 
     private void addSurveysToList(List<Survey> result) {
@@ -74,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements SurveyListItem.On
     @Override
     public void onSurveyClick(@NonNull SurveyListItem item) {
         Intent intent = new Intent(this, QuestionActivity.class);
-        intent.putExtra("ID", item.getSurvey().getId());
+        intent.putExtra(QuestionActivity.EXTRA_SURVEY_ID, item.getSurvey().getId());
         startActivity(intent);
     }
 }

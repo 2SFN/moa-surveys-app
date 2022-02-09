@@ -43,8 +43,9 @@ import de.fhswf.moa.surveys.util.CirclePagerIndicatorDecoration;
 public class QuestionActivity extends AppCompatActivity implements
         EndQuestionListItem.OnEndClickListener,
         EndQuestionListItem.OnResultsClickListener {
+    public static final String EXTRA_SURVEY_ID = "id";
 
-    private String SurveyID;
+    private String surveyID;
     private Survey survey;
 
     private SurveyService surveyService;
@@ -57,8 +58,8 @@ public class QuestionActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         // ID des Survey aus dem Intent entnehmen und in einem String speichern
-        Intent MainActivityIntent = getIntent();
-        SurveyID = MainActivityIntent.getStringExtra("ID");
+        Intent mainActivityIntent = getIntent();
+        surveyID = mainActivityIntent.getStringExtra(EXTRA_SURVEY_ID);
 
         //Setting up View
         setContentView(R.layout.question_view);
@@ -83,7 +84,7 @@ public class QuestionActivity extends AppCompatActivity implements
 
         this.surveyService = new RemoteSurveyService(this);
         surveyService.fetchSurveyDetails(
-                SurveyID,
+                surveyID,
                 this::handleSurveyResult,
                 this::handleError
         );
@@ -94,7 +95,7 @@ public class QuestionActivity extends AppCompatActivity implements
     public boolean onCreateOptionsMenu(Menu menu) {
         // Actionbar-Menü-Eintrag, mit dem man direkt zu den Ergebnissen springen kann
         // (Icon analog zur End-Card)
-        menu.add("Direkt zu den Ergebnissen")
+        menu.add(R.string.questions_menu_results)
                 .setOnMenuItemClickListener(m -> {
                     openResults();
                     return true;
@@ -206,7 +207,7 @@ public class QuestionActivity extends AppCompatActivity implements
 
     private void openResults() {
         Intent intent = new Intent(this, ResultActivity.class);
-        intent.putExtra("ID", SurveyID);
+        intent.putExtra(ResultActivity.EXTRA_SURVEY_ID, surveyID);
         startActivity(intent);
         finish();
     }

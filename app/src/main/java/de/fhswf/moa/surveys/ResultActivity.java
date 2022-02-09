@@ -20,18 +20,19 @@ import de.fhswf.moa.surveys.list.item.result.SelectQuestionResultItem;
 import de.fhswf.moa.surveys.model.*;
 
 public class ResultActivity extends AppCompatActivity {
+    public static final String EXTRA_SURVEY_ID = "id";
 
     private String surveyID;
     private SurveyService surveyService;
     private ListAdapter adapter;
 
     @Override
-    protected void onCreate(Bundle savedIntanceState) {
-        super.onCreate(savedIntanceState);
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
         // ID des Survey aus dem Intent entnehmen und in einem String speichern
         Intent MainActivityIntent = getIntent();
-        surveyID = MainActivityIntent.getStringExtra("ID");
+        surveyID = MainActivityIntent.getStringExtra(EXTRA_SURVEY_ID);
 
         //Setting up View
         setContentView(R.layout.question_view);

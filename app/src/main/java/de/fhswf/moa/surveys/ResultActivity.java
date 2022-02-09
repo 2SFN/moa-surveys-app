@@ -2,13 +2,15 @@ package de.fhswf.moa.surveys;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
+
+import java.util.Locale;
 
 import de.fhswf.moa.surveys.api.service.RemoteSurveyService;
 import de.fhswf.moa.surveys.api.service.SurveyService;
@@ -17,7 +19,12 @@ import de.fhswf.moa.surveys.list.item.question.InfoQuestionListItem;
 import de.fhswf.moa.surveys.list.item.result.InputQuestionResultItem;
 import de.fhswf.moa.surveys.list.item.result.RatingQuestionResultItem;
 import de.fhswf.moa.surveys.list.item.result.SelectQuestionResultItem;
-import de.fhswf.moa.surveys.model.*;
+import de.fhswf.moa.surveys.model.InfoQuestion;
+import de.fhswf.moa.surveys.model.InputQuestion;
+import de.fhswf.moa.surveys.model.Question;
+import de.fhswf.moa.surveys.model.RatingQuestion;
+import de.fhswf.moa.surveys.model.SingleSelectQuestion;
+import de.fhswf.moa.surveys.model.Survey;
 
 public class ResultActivity extends AppCompatActivity {
     public static final String EXTRA_SURVEY_ID = "id";
@@ -25,6 +32,7 @@ public class ResultActivity extends AppCompatActivity {
     private String surveyID;
     private SurveyService surveyService;
     private ListAdapter adapter;
+    private boolean busy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,20 +58,30 @@ public class ResultActivity extends AppCompatActivity {
 
         // Daten abrufen
         surveyService = new RemoteSurveyService(this);
+        fetchSurveyDetails();
+    }
 
-        surveyService.fetchSurveyDetails(
-                surveyID,
-                this::handleSurveyResult,
-                this::handleError
-        );
+    private void fetchSurveyDetails() {
+        if(!busy) {
+            this.busy = true;
+
+            surveyService.fetchSurveyDetails(
+                    surveyID,
+                    this::handleSurveyResult,
+                    this::handleSurveyDetailsError
+            );
+        }
     }
 
     private void handleSurveyResult(Survey survey) {
+        this.busy = false;
+        adapter.clear();
+
         // Titel
         setTitle(String.format(getString(R.string.result_activity_title), survey.getTitle()));
 
         if(survey.getQuestions() == null) {
-            handleError(new RuntimeException("No questions received!"));
+            handleSurveyDetailsError(new RuntimeException("No questions received!"));
             return;
         }
 
@@ -89,8 +107,24 @@ public class ResultActivity extends AppCompatActivity {
         }
     }
 
-    private void handleError(Throwable e) {
-        // TODO
-        Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+    /**
+     * Fehler-Behandlung für das Abrufen der Survey-Details.
+     *
+     * Da ein Versagen hier bedeutet, dass die Activity nicht weiter genutzt werden kann, gibt
+     * es hier lediglich die Möglichkeit, es erneut zu versuchen, oder die Activity zu beenden.
+     *
+     * @param e Fehler-Details.
+     */
+    private void handleSurveyDetailsError(Throwable e) {
+        this.busy = false;
+
+        new AlertDialog.Builder(this, R.style.ErrorDialogTheme)
+                .setTitle(R.string.dialog_title_error)
+                .setMessage(String.format(Locale.getDefault(),
+                        getString(R.string.dialog_message_error), e.getMessage()))
+                .setPositiveButton(R.string.retry, (dialog, which) -> fetchSurveyDetails())
+                .setNegativeButton(R.string.exit, (dialog, which) -> finish())
+                .setCancelable(true).setOnCancelListener(di -> finish())
+                .show();
     }
 }

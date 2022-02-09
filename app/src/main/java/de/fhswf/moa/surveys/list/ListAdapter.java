@@ -1,6 +1,5 @@
 package de.fhswf.moa.surveys.list;
 
-import android.media.Rating;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -35,8 +34,7 @@ import de.fhswf.moa.surveys.list.viewholder.result.SelectQuestionResultViewHolde
 
 public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
-    private ArrayList<ListItem> items;
-
+    private final ArrayList<ListItem> items;
 
     public ListAdapter() {
         this.items = new ArrayList<>();
@@ -97,8 +95,7 @@ public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
                         inflater.inflate(R.layout.question_item, parent, false));
 
             default:
-                // Ist dat kein Problem ??
-                return null;
+                throw new RuntimeException("Unsupported item-type: " + viewType);
         }
     }
 
@@ -121,6 +118,15 @@ public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         int index = items.size();
         items.add(item);
         notifyItemInserted(index);
+    }
+
+    /**
+     * Entfernt alle items aus der Liste und benachrichtigt den Adapter.
+     */
+    public synchronized void clear() {
+        int count = items.size();
+        items.clear();
+        notifyItemRangeRemoved(0, count);
     }
 
     public ArrayList<ListItem> getItems() {

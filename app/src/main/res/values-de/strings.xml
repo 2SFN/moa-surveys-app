@@ -16,4 +16,9 @@
     <string name="survey_end_submit_button">Eingaben senden und Ergebnisse anzeigen</string>
     <string name="questions_menu_results">Direkt zu den Ergebnissen</string>
     <string name="input_question_hint">Antwort eingeben</string>
+    <string name="dialog_title_error">Fehler</string>
+    <string name="dialog_message_error">Beim Abrufen oder Verarbeiten von Daten ist der folgende Fehler aufgetreten:\n\n%s</string>
+    <string name="retry">Erneut versuchen</string>
+    <string name="exit">Beenden</string>
+    <string name="ok">OK</string>
 </resources>

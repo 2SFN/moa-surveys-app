@@ -2,9 +2,9 @@ package de.fhswf.moa.surveys;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity implements SurveyListItem.On
     private ListAdapter adapter;
 
     private SurveyService surveyService;
+    private boolean busy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements SurveyListItem.On
         // Set First View
         setContentView(R.layout.activity_main);
         RecyclerView container = findViewById(R.id.container);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(
+                this, LinearLayoutManager.VERTICAL, false);
         container.setLayoutManager(layoutManager);
 
         //Set Adapter for Recyclerview
@@ -42,25 +44,48 @@ public class MainActivity extends AppCompatActivity implements SurveyListItem.On
 
         // Init survey-service
         this.surveyService = new RemoteSurveyService(this);
-//        this.surveyService = new MockSurveyService();   Mock-Version
+//        this.surveyService = new MockSurveyService(true);   //Mock-Version
 
         // Daten von Service laden
-        surveyService.fetchSurveyList(
-                this::addSurveysToList,
-                this::showErrorDialog
-        );
+        this.busy = false;
+        refreshContent();
+    }
+
+    /**
+     * Initiiert das Abrufen von Umfragen.
+     */
+    private void refreshContent() {
+        if(!busy) {
+            this.busy = true;
+
+            surveyService.fetchSurveyList(
+                    this::addSurveysToList,
+                    this::showErrorDialog
+            );
+        }
     }
 
     private void addSurveysToList(List<Survey> result) {
+        this.busy = false;
+        adapter.clear();
+
         for (Survey c : result) {
             adapter.add(new SurveyListItem(c).setOnSurveyListener(this));
         }
     }
 
     private void showErrorDialog(Throwable e) {
-        // TODO: Ordentlichen Fehler-Dialog anzeigen, neu versuchen Option
-        e.printStackTrace();
-        Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
+        this.busy = false;
+
+        new AlertDialog.Builder(this, R.style.ErrorDialogTheme)
+                .setTitle(R.string.dialog_title_error)
+                .setMessage(String.format(
+                        getString(R.string.dialog_message_error), e.getMessage()))
+                .setPositiveButton(R.string.retry, (dialog, which) -> refreshContent())
+                .setNegativeButton(R.string.exit, (dialog, which) -> finish())
+                .setCancelable(true)
+                .setOnCancelListener(dialog -> finish())
+                .show();
     }
 
     @Override

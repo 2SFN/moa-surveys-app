@@ -46,6 +46,12 @@ public class MockSurveyService implements SurveyService {
         fillExampleSurveys();
     }
 
+    public MockSurveyService(boolean generateNegativeResponses) {
+        this();
+
+        this.generateNegativeResponses = generateNegativeResponses;
+    }
+
     @Override
     public void fetchSurveyList(@Nullable OnSuccessListener<List<Survey>> onSuccessListener,
                                 @Nullable OnFailureListener onFailureListener) {
@@ -97,10 +103,10 @@ public class MockSurveyService implements SurveyService {
         this.generateNegativeResponses = generateNegativeResponses;
     }
 
-    @SuppressWarnings("ThrowableNotThrown")
     private void errorCall(String source, @Nullable OnFailureListener onFailureListener) {
         if (onFailureListener != null) {
-            handler.postDelayed(() -> new ParsingException("Mock-Error for %s!", source), DELAY);
+            handler.postDelayed(() -> onFailureListener.onFailure(
+                    new ParsingException("Mock-Error for %s!", source)), DELAY);
         }
     }
 

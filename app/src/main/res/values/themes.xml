@@ -40,5 +40,8 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="ErrorDialogTheme" parent="Theme.MaterialComponents.Light.Dialog">
+    </style>
+
 
 </resources>

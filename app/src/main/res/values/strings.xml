@@ -16,4 +16,9 @@
     <string name="survey_end_submit_button">Send input and show results</string>
     <string name="questions_menu_results">Directly to results</string>
     <string name="input_question_hint">Input answer</string>
+    <string name="dialog_title_error">Error</string>
+    <string name="dialog_message_error">The following error occurred while fetching or processing data:\n\n%s</string>
+    <string name="retry">Retry</string>
+    <string name="exit">Exit</string>
+    <string name="ok">OK</string>
 </resources>

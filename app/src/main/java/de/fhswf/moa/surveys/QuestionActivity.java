@@ -5,9 +5,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
@@ -47,6 +47,7 @@ public class QuestionActivity extends AppCompatActivity implements
 
     private String surveyID;
     private Survey survey;
+    private boolean busy;
 
     private SurveyService surveyService;
     private ListAdapter adapter;
@@ -61,7 +62,7 @@ public class QuestionActivity extends AppCompatActivity implements
         Intent mainActivityIntent = getIntent();
         surveyID = mainActivityIntent.getStringExtra(EXTRA_SURVEY_ID);
 
-        //Setting up View
+        // Setting up View
         setContentView(R.layout.question_view);
         RecyclerView container = findViewById(R.id.question_container);
 
@@ -72,7 +73,7 @@ public class QuestionActivity extends AppCompatActivity implements
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(container);
 
-        //Recyclerview Adapter anfügen
+        // Recyclerview Adapter anfügen
         adapter = new ListAdapter();
         container.setAdapter(adapter);
 
@@ -82,13 +83,27 @@ public class QuestionActivity extends AppCompatActivity implements
         container.addOnScrollListener(new IndicatorScrollListener());
         updateProgressText();
 
+        // Content laden
         this.surveyService = new RemoteSurveyService(this);
-        surveyService.fetchSurveyDetails(
-                surveyID,
-                this::handleSurveyResult,
-                this::handleError
-        );
+//        this.surveyService = new MockSurveyService(true); // Mock-Service
 
+        this.busy = false;
+        fetchSurveyDetails();
+    }
+
+    /**
+     * Stößt das Abrufen der Survey-Details (mit Fragen) an.
+     */
+    private void fetchSurveyDetails() {
+        if (!busy) {
+            this.busy = true;
+
+            surveyService.fetchSurveyDetails(
+                    surveyID,
+                    this::handleSurveyResult,
+                    this::handleSurveyDetailsError
+            );
+        }
     }
 
     @Override
@@ -111,15 +126,17 @@ public class QuestionActivity extends AppCompatActivity implements
      * @param result Survey mit Details.
      */
     private void handleSurveyResult(Survey result) {
+        this.busy = false;
         this.survey = result;
 
         if (survey.getQuestions() == null) {
-            // TODO: Fehler behandeln
+            handleSurveyDetailsError(new RuntimeException("Survey details are incomplete!"));
             return;
         }
 
         // Titel der Activity
         setTitle(survey.getTitle());
+        adapter.clear();
 
         for (Question c : survey.getQuestions()) {
             ListItem item;
@@ -155,10 +172,6 @@ public class QuestionActivity extends AppCompatActivity implements
         updateProgressText();
     }
 
-    private void handleError(Throwable e) {
-        // TODO
-    }
-
     /**
      * Aufgerufen, wenn der "Ergebnisse anzeigen" Button geklickt wird.
      *
@@ -183,20 +196,12 @@ public class QuestionActivity extends AppCompatActivity implements
             surveyService.submitResponses(
                     survey.getId(),
                     results,
-                    r -> {
-                        // II. Zur result-activity
-                        openResults();
-                    },
-                    e -> {
-                        e.printStackTrace();
-                        Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                        // TODO: Fehler-Behandlung
-                    }
+                    r -> openResults(),
+                    this::handleCommonError
             );
 
         } catch (JSONException e) {
-            e.printStackTrace();
-            // TODO: Fehler-Behandlung
+            handleCommonError(new RuntimeException("Couldn't assemble request body!"));
         }
     }
 
@@ -218,7 +223,7 @@ public class QuestionActivity extends AppCompatActivity implements
     private void updateProgressText() {
         // Position ermitteln
         int position = layoutManager.findFirstVisibleItemPosition() + 1;
-        if(position == 0) position = 1;
+        if (position == 0) position = 1;
 
         // Text aktualisieren
         String label = String.format(Locale.getDefault(),
@@ -227,6 +232,48 @@ public class QuestionActivity extends AppCompatActivity implements
         progressText.setText(label);
     }
 
+    /**
+     * Fehler-Behandlung für das Abrufen der Survey-Details.
+     *
+     * Da ein Versagen hier bedeutet, dass die Activity nicht weiter genutzt werden kann, gibt
+     * es hier lediglich die Möglichkeit, es erneut zu versuchen, oder die Activity zu beenden.
+     *
+     * @param e Fehler-Details.
+     */
+    private void handleSurveyDetailsError(Throwable e) {
+        this.busy = false;
+
+        new AlertDialog.Builder(this, R.style.ErrorDialogTheme)
+                .setTitle(R.string.dialog_title_error)
+                .setMessage(String.format(Locale.getDefault(),
+                        getString(R.string.dialog_message_error), e.getMessage()))
+                .setPositiveButton(R.string.retry, (dialog, which) -> fetchSurveyDetails())
+                .setNegativeButton(R.string.exit, (dialog, which) -> finish())
+                .setCancelable(true).setOnCancelListener(di -> finish())
+                .show();
+    }
+
+    /**
+     * Zeige einen Fehler-Dialog für allgemeine Fehler (insbesondere bei der Übermittlung
+     * der Ergebnisse).
+     *
+     * @param e Details.
+     */
+    private void handleCommonError(Throwable e) {
+        this.busy = false;
+
+        new AlertDialog.Builder(this, R.style.ErrorDialogTheme)
+                .setTitle(R.string.dialog_title_error)
+                .setMessage(String.format(Locale.getDefault(),
+                        getString(R.string.dialog_message_error), e.getMessage()))
+                .setPositiveButton(R.string.ok, null)
+                .show();
+    }
+
+    /**
+     * Scroll-Listener Implementierung, welche den Text der Fortschritts-Anzeige aktualisiert,
+     * wenn der Nutzer mit dem RecyclerView interagiert.
+     */
     private class IndicatorScrollListener extends RecyclerView.OnScrollListener {
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {

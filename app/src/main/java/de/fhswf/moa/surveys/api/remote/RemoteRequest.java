@@ -7,11 +7,15 @@ import android.os.Looper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import de.fhswf.moa.surveys.api.OnFailureListener;
 import de.fhswf.moa.surveys.api.OnSuccessListener;
@@ -102,7 +106,20 @@ public class RemoteRequest<T> {
                 Request.Method.POST, url, body,
                 this::handleResult,
                 this::handleVolleyError
-        );
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                // Eigene Header, um das Backend auf den Content-Type und das verwendete
+                // Charset hinzuweisen. Erforderlich, damit Anfragen mit Umlauten und anderen
+                // Sonderzeichen erfolgreich ausgeführt werden können.
+
+                Map<String, String> headers = new HashMap<>(2);
+                headers.put("Content-Type", "application/json");
+                headers.put("charset", "utf-8");
+
+                return headers;
+            }
+        };
 
         // Request in Warteschlange einreihen
         RequestManager.getInstance(context).addToRequestQueue(request);

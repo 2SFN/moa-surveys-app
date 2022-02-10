@@ -12,5 +12,17 @@
     <color name="light_green">#5BBB74</color>
     <color name="light_red">#F46D61</color>
     <color name="transparent">#00000000</color>
+    <color name="light_blue">#63DCD1</color>
+    <color name="light_purple">#DCB6F2</color>
+    <!-- not good colors -->
+    <color name="light_lightblue">#83E4D9</color>
+
+    <color name="light_yellow">#cfb961</color>
+
     <color name="semi_black">#68000000</color>
+    <!-- Good colors -->
+    <color name="light_orange">#f49448</color>
+    <color name="name">#805781</color>
+    <color name="testing">#00ceb5</color>
+    <color name="testing2">#4dcfe1</color>
 </resources>

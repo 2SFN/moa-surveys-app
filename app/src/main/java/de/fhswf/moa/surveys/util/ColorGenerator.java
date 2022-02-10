@@ -33,23 +33,28 @@ public class ColorGenerator {
         ));
 
         MATERIAL = create(Arrays.asList(
-                0xffe57373,
-                0xfff06292,
-                0xffba68c8,
+                //rot
+                0xffF46D61,
+                0xfff06292, // stärker
+
+                0xffba68c8, // Lila
                 0xff9575cd,
                 0xff7986cb,
                 0xff64b5f6,
-                0xff4fc3f7,
-                0xff4dd0e1,
+               // 0xff4fc3f7, // auch Türkis
+                0xff4dd0e1, // Türkis
                 0xff4db6ac,
-                0xff81c784,
-                0xffaed581,
+               // 0xff81c784, leicht zu helles grün
                 0xffff8a65,
-                0xffd4e157,
-                0xffffd54f,
-                0xffffb74d,
-                0xffa1887f,
-                0xff90a4ae
+               // 0xffffb74d, Gelb zu hell
+               // 0xffa1887f, braun
+               // 0xff90a4ae, // Blau silber misch
+                0xff00655B,  // grün dunkel
+                0xffB7950B, // gelb dunkel
+                0xff28B463, // grün kräftig ++
+                0xff5EA09C, // Blau
+
+                0xfff49448 // oranges gelb
         ));
     }
 

@@ -32,7 +32,7 @@ public class SurveyParser implements ResponseParser<Survey> {
         survey.setDescription(data.optString("description", ""));
 
         // Fragen sind optional
-        if(data.has("questions")) {
+        if (data.has("questions")) {
             try {
                 JSONArray array = data.getJSONArray("questions");
 

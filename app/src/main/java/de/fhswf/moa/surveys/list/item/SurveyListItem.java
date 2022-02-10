@@ -5,13 +5,12 @@ import androidx.annotation.NonNull;
 import de.fhswf.moa.surveys.model.Survey;
 
 /**
- * Wrapper Class für Survey
- * @author Joey F.M. Esteves , Konzept SFN
+ * Wrapper Class für einzelne Survey (Übersicht)
  */
 public class SurveyListItem implements ListItem {
     public static final int TYPE = 1;
 
-    private Survey survey;
+    private final Survey survey;
     private OnSurveyListener onSurveyListener;
 
     public SurveyListItem(Survey survey) {
@@ -27,29 +26,25 @@ public class SurveyListItem implements ListItem {
         return TYPE;
     }
 
-    /**
-     * Getter Listener
-     * @return onSurveyListener
-     */
     public OnSurveyListener getOnSurveyListener() {
         return onSurveyListener;
     }
 
-    /**
-     * Setter Listener
-     * @param onSurveyListener
-     * @return onSurveyListener
-     */
     public SurveyListItem setOnSurveyListener(OnSurveyListener onSurveyListener) {
         this.onSurveyListener = onSurveyListener;
         return this;
     }
 
     /**
-     * Interface für Listener
-     * @author Joey F.M. Esteves
+     * Callback-Interface für Nutzer-Interaktion.
      */
-    public interface OnSurveyListener{
+    public interface OnSurveyListener {
+
+        /**
+         * Wird aufgerufen, wenn der Nutzer eine Survey auswählt.
+         *
+         * @param item Angeklicktes Survey-Item.
+         */
         void onSurveyClick(@NonNull SurveyListItem item);
     }
 }

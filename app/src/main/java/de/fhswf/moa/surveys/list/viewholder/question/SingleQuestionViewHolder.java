@@ -12,7 +12,16 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.SingleQuestionListItem;
 import de.fhswf.moa.surveys.list.viewholder.ContainerCardBaseViewHolder;
+import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 
+/**
+ * ViewHolder-Implementierung für {@link SingleQuestionListItem}.
+ * <p>
+ * Erzeugt eine {@link RadioGroup} mit einem {@link RadioButton} für jede Option
+ * (s. {@link SingleSelectQuestion#getOptions()}).
+ *
+ * @see SingleQuestionListItem#setUserInput(String) Festhalten der Nutzer-Eingaben.
+ */
 public class SingleQuestionViewHolder extends ContainerCardBaseViewHolder<SingleQuestionListItem> {
 
     public SingleQuestionViewHolder(@NonNull View itemView) {
@@ -30,6 +39,7 @@ public class SingleQuestionViewHolder extends ContainerCardBaseViewHolder<Single
             item.setUserInput(button.getText().toString());
         };
 
+        // Radio-Buttons für jede Option erzeugen
         for (String c : item.getQuestion().getOptions()) {
             RadioButton radioButton = new RadioButton(new ContextThemeWrapper(
                     getContext(), R.style.WhiteCheckedButtons));
@@ -37,7 +47,8 @@ public class SingleQuestionViewHolder extends ContainerCardBaseViewHolder<Single
             radioButton.setTextColor(Color.WHITE);
             radioButton.setOnCheckedChangeListener(checkedChangeListener);
 
-            if(c.equals(item.getUserInput())) {
+            // Auswahl setzen, falls schon vorhanden
+            if (c.equals(item.getUserInput())) {
                 radioButton.setChecked(true);
             }
 

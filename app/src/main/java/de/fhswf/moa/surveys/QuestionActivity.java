@@ -40,6 +40,13 @@ import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 import de.fhswf.moa.surveys.model.Survey;
 import de.fhswf.moa.surveys.util.CirclePagerIndicatorDecoration;
 
+/**
+ * Activity, welche die Details einer Umfrage abruft und die Fragen als horizontal navigierbare
+ * Karten darstellt.
+ * <p>
+ * Außerdem wird hier auch das (optionale) Übermitteln der Ergebnisse übernommen
+ * (s. {@link this#onEndButtonClick(EndQuestionListItem)}).
+ */
 public class QuestionActivity extends AppCompatActivity implements
         EndQuestionListItem.OnEndClickListener,
         EndQuestionListItem.OnResultsClickListener {
@@ -210,6 +217,14 @@ public class QuestionActivity extends AppCompatActivity implements
         openResults();
     }
 
+    /**
+     * Erzeugt einen Intent, welcher die {@link ResultActivity} startet.
+     * <p>
+     * Übergibt die Survey-ID als Extra.
+     * <p>
+     * Beendet außerdem diese Activity, um dem Interaktionsdesign treu zu bleiben
+     * (zurück navigieren führt dann wieder zu der Startseite/{@link MainActivity}).
+     */
     private void openResults() {
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra(ResultActivity.EXTRA_SURVEY_ID, surveyID);
@@ -234,7 +249,7 @@ public class QuestionActivity extends AppCompatActivity implements
 
     /**
      * Fehler-Behandlung für das Abrufen der Survey-Details.
-     *
+     * <p>
      * Da ein Versagen hier bedeutet, dass die Activity nicht weiter genutzt werden kann, gibt
      * es hier lediglich die Möglichkeit, es erneut zu versuchen, oder die Activity zu beenden.
      *

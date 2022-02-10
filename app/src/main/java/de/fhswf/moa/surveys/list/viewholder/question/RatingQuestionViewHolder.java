@@ -12,6 +12,14 @@ import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.RatingQuestionListItem;
 import de.fhswf.moa.surveys.list.viewholder.ContainerCardBaseViewHolder;
 
+/**
+ * ViewHolder-Implementierung für {@link RatingQuestionListItem}.
+ * <p>
+ * Erzeugt eine {@link RatingBar} mit fünf Sternen, mit welcher der Anwender eine Bewertung
+ * auswählen kann.
+ *
+ * @see RatingQuestionListItem#setUserInput(Float) Festhalten der Nutzer-Eingaben.
+ */
 public class RatingQuestionViewHolder extends ContainerCardBaseViewHolder<RatingQuestionListItem> {
 
     public RatingQuestionViewHolder(@NonNull View itemView) {
@@ -29,7 +37,7 @@ public class RatingQuestionViewHolder extends ContainerCardBaseViewHolder<Rating
         ratingBar.setNumStars(5);
 
         // Hat der Nutzer bereits eine Bewertung ausgewählt?
-        if(item.getUserInput() != null) {
+        if (item.getUserInput() != null) {
             ratingBar.setRating(item.getUserInput());
         }
 
@@ -40,6 +48,7 @@ public class RatingQuestionViewHolder extends ContainerCardBaseViewHolder<Rating
             }
         });
 
+        // In den Container einfügen
         addContentView(ratingBar);
 
         LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) ratingBar.getLayoutParams();

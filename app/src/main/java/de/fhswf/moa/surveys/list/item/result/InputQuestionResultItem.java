@@ -3,6 +3,12 @@ package de.fhswf.moa.surveys.list.item.result;
 import de.fhswf.moa.surveys.list.item.question.InputQuestionListItem;
 import de.fhswf.moa.surveys.model.InputQuestion;
 
+/**
+ * Ergebnis-Item für {@link InputQuestion}.
+ * <p>
+ * Verwaltet zusätzlich die Position/Seite des Ergebnisses, welches sich der Nutzer gerade
+ * anschaut.
+ */
 public class InputQuestionResultItem extends InputQuestionListItem {
     public static final int ITEM_TYPE = 13;
 

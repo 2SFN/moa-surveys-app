@@ -135,16 +135,34 @@ public class RemoteRequest<T> {
         }
     }
 
+    /**
+     * Behandelt Volley-Fehler (keine Verbindung, HTTP-Fehler, etc.).
+     * <p>
+     * Diese werden vor dem Weitergeben in einer API-Exception umschlossen, um die Message
+     * benutzerfreundlicher zu halten.
+     *
+     * @param error Volley Fehler.
+     */
     private void handleVolleyError(VolleyError error) {
         postFailure(new ApiException("Network error.", error));
     }
 
+    /**
+     * Ruft das Fehler-Callback im Main-Thread auf.
+     *
+     * @param e Fehler-Details.
+     */
     private void postFailure(@NonNull Throwable e) {
         if (onFailureListener != null) {
             handler.post(() -> onFailureListener.onFailure(e));
         }
     }
 
+    /**
+     * Ruft das Ergebnis-Callback im Main-Thread auf.
+     *
+     * @param result Ergebnis-Objekt.
+     */
     private void postSuccess(@Nullable T result) {
         if (onSuccessListener != null) {
             handler.post(() -> onSuccessListener.onSuccess(result));

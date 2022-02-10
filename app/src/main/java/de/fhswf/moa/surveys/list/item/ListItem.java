@@ -1,21 +1,16 @@
 package de.fhswf.moa.surveys.list.item;
 
+import android.view.ViewGroup;
+
 /**
- * Interface für Listitem
- * @description Wrapper for each Questiontype
- *          getType() wird benutzt um die verschiedenen Fragekartentypen zu unterscheiden.
- *            1 Survey
- *            2 InfoQuestion
- *            3 InputQuestion
- *            4 SingleSelectQuestion
- *            5 MultiSelectQuestion
- *            6 RatingQuestion
- *            7 EndQuestion
- * @author SFN
+ * Interface für List-Items, welche durch den {@link de.fhswf.moa.surveys.list.ListAdapter}
+ * verwaltet werden.
+ *
+ * @see de.fhswf.moa.surveys.list.ListAdapter#onCreateViewHolder(ViewGroup, int) verwendet.
  */
 public interface ListItem {
+
     /**
-     *
      * @return Integer welcher einen Typen darstellt.
      */
     int getType();

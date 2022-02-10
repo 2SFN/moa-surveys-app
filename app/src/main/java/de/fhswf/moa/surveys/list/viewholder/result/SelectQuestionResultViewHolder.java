@@ -47,7 +47,7 @@ public class SelectQuestionResultViewHolder
                 R.layout.result_item, getContainer(), false);
 
         // Prozent berechnen
-        int percent = (int) ((value / ((float) max))*100);
+        int percent = (int) ((value / ((float) max)) * 100);
 
         // Werte setzen
         ((TextView) item.findViewById(R.id.caption)).setText(caption);

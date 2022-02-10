@@ -24,11 +24,20 @@ import de.fhswf.moa.surveys.model.Survey;
  * @see RemoteRequest Für HTTP-Anfragen verwendet.
  */
 public class RemoteSurveyService implements SurveyService {
+
+    /**
+     * Basis-URL des Remote-Backends (ohne abschließendes '/').
+     */
     public static final String BASE_URL = "http://167.86.108.121:9084/SurveyBackend/api";
 
     private final @NonNull
     Context context;
 
+    /**
+     * Erzeuge eine neue Service-Instanz.
+     *
+     * @param context Context, erforderlich für Requests.
+     */
     public RemoteSurveyService(@NonNull Context context) {
         this.context = context;
     }
@@ -60,7 +69,7 @@ public class RemoteSurveyService implements SurveyService {
                     onFailureListener
             ).execute();
         } catch (JSONException e) {
-            if(onFailureListener != null)
+            if (onFailureListener != null)
                 onFailureListener.onFailure(e);
         }
     }
@@ -81,7 +90,7 @@ public class RemoteSurveyService implements SurveyService {
                     onFailureListener
             ).execute();
         } catch (JSONException e) {
-            if(onFailureListener != null)
+            if (onFailureListener != null)
                 onFailureListener.onFailure(e);
         }
     }

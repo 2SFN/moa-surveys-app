@@ -26,6 +26,10 @@ import de.fhswf.moa.surveys.model.RatingQuestion;
 import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 import de.fhswf.moa.surveys.model.Survey;
 
+/**
+ * Activity, welche die Details einer Umfrage abruft und die Frage-Ergebnisse sehr ähnlich der
+ * Darstellung in der {@link QuestionActivity} präsentiert.
+ */
 public class ResultActivity extends AppCompatActivity {
     public static final String EXTRA_SURVEY_ID = "id";
 
@@ -61,8 +65,11 @@ public class ResultActivity extends AppCompatActivity {
         fetchSurveyDetails();
     }
 
+    /**
+     * Ruft die Umfrage-Details ab.
+     */
     private void fetchSurveyDetails() {
-        if(!busy) {
+        if (!busy) {
             this.busy = true;
 
             surveyService.fetchSurveyDetails(
@@ -80,13 +87,13 @@ public class ResultActivity extends AppCompatActivity {
         // Titel
         setTitle(String.format(getString(R.string.result_activity_title), survey.getTitle()));
 
-        if(survey.getQuestions() == null) {
+        if (survey.getQuestions() == null) {
             handleSurveyDetailsError(new RuntimeException("No questions received!"));
             return;
         }
 
         // Ergebnis-Items erzeugen
-        for(Question q : survey.getQuestions()) {
+        for (Question q : survey.getQuestions()) {
             switch (q.getType()) {
                 case INFO:
                     adapter.add(new InfoQuestionListItem((InfoQuestion) q));
@@ -109,7 +116,7 @@ public class ResultActivity extends AppCompatActivity {
 
     /**
      * Fehler-Behandlung für das Abrufen der Survey-Details.
-     *
+     * <p>
      * Da ein Versagen hier bedeutet, dass die Activity nicht weiter genutzt werden kann, gibt
      * es hier lediglich die Möglichkeit, es erneut zu versuchen, oder die Activity zu beenden.
      *

@@ -110,6 +110,9 @@ public class MockSurveyService implements SurveyService {
         }
     }
 
+    /**
+     * Generiert einige Beispiel-Umfragen zum Testen.
+     */
     private void fillExampleSurveys() {
         surveys.add(new Survey(
                         "S1", "Lieblingsfarbe",
@@ -122,7 +125,7 @@ public class MockSurveyService implements SurveyService {
                         "Beschreibe, wie du dich fühlst, wenn du über das Thema " +
                                 "'Farben' nachdenkst.", 500
                 ).addResults(
-                        "Gut", "Schlecht", "Medium", "Glücklich", "Nervös"
+                "Gut", "Schlecht", "Medium", "Glücklich", "Nervös"
                 )).addQuestion(randomizeSelectionResults(new SingleSelectQuestion(
                         "Q1-3", "Lieblingsfarbe",
                         "Wähle hier deine absolute Lieblingsfarbe aus. Sollte deine " +
@@ -178,7 +181,7 @@ public class MockSurveyService implements SurveyService {
         Random random = new Random();
         int sum = 0;
 
-        for(String c : question.getOptions()) {
+        for (String c : question.getOptions()) {
             int rnd = random.nextInt(123);
             map.put(c, rnd);
             sum += rnd;
@@ -196,7 +199,7 @@ public class MockSurveyService implements SurveyService {
         Random random = new Random();
         int sum = 0;
 
-        for(int i = 1; i <= 5; i++) {
+        for (int i = 1; i <= 5; i++) {
             int rnd = random.nextInt(123);
             map.put(i, rnd);
             sum += rnd;

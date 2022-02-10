@@ -10,6 +10,11 @@ import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.SurveyListItem;
 import de.fhswf.moa.surveys.util.ColorGenerator;
 
+/**
+ * ViewHolder-Implementierung für {@link SurveyListItem}.
+ *
+ * Eine einfache, anklickbare Karte mit Titel und Beschreibung der Umfrage.
+ */
 public class SurveyListEntryViewHolder extends BaseViewHolder<SurveyListItem>
         implements View.OnClickListener {
 

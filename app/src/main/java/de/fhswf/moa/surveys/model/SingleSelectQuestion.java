@@ -22,7 +22,8 @@ public class SingleSelectQuestion extends Question {
 
     private Map<String, Integer> results;
 
-    public SingleSelectQuestion() {}
+    public SingleSelectQuestion() {
+    }
 
     public SingleSelectQuestion(String id, String title, @Nullable String description) {
         super(id, title, description);
@@ -50,10 +51,10 @@ public class SingleSelectQuestion extends Question {
      * @param option Text für die neue Option.
      */
     public SingleSelectQuestion addOption(@NonNull String option) {
-        if(this.options == null)
+        if (this.options == null)
             this.options = new ArrayList<>();
 
-        if(!options.contains(option))
+        if (!options.contains(option))
             options.add(option);
 
         return this;

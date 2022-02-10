@@ -13,10 +13,10 @@ import de.fhswf.moa.surveys.model.RatingQuestion;
  *
  * @author Joey F.M. Esteves
  */
-public class RatingQuestionListItem implements QuestionListItem, QuestionResultItem{
+public class RatingQuestionListItem implements QuestionListItem, QuestionResultItem {
     public static final int TYPE = 6;
 
-    private RatingQuestion question;
+    private final RatingQuestion question;
     private Float userInput;
 
     public RatingQuestionListItem(RatingQuestion question) {
@@ -44,10 +44,10 @@ public class RatingQuestionListItem implements QuestionListItem, QuestionResultI
     @Nullable
     @Override
     public JSONObject getResult() throws JSONException {
-        if (userInput != null){
+        if (userInput != null) {
             return new JSONObject()
-                    .put("type",question.getType().getValue())
-                    .put("id",question.getId())
+                    .put("type", question.getType().getValue())
+                    .put("id", question.getId())
                     .put("response", userInput);
         }
         return null;

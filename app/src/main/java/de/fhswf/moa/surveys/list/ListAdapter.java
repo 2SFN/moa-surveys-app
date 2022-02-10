@@ -32,6 +32,13 @@ import de.fhswf.moa.surveys.list.viewholder.result.InputQuestionResultViewHolder
 import de.fhswf.moa.surveys.list.viewholder.result.RatingQuestionResultViewHolder;
 import de.fhswf.moa.surveys.list.viewholder.result.SelectQuestionResultViewHolder;
 
+/**
+ * Adapter-Implementierung, die mehrere View-Typen verwalten kann.
+ *
+ * @see BaseViewHolder Grundlegende ViewHolder-Klasse.
+ * @see ListItem Verwaltete Item-Klasse.
+ */
+@SuppressWarnings("rawtypes")
 public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     private final ArrayList<ListItem> items;
@@ -114,6 +121,11 @@ public class ListAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         return items.size();
     }
 
+    /**
+     * Füge der Liste ein neues Item hinzu und benachrichtige den Adapter.
+     *
+     * @param item Hinzuzufügendes Item.
+     */
     public synchronized void add(@NonNull ListItem item) {
         int index = items.size();
         items.add(item);

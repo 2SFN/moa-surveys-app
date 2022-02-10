@@ -13,6 +13,13 @@ import de.fhswf.moa.surveys.model.Survey;
 
 /**
  * Service-Definition, welche {@link Survey}-bezogene Funktionen bereitstellt.
+ * <p>
+ * Um einen parallelen Einsatz zu ermöglichen, haben die Funktionen direkt keine Typen als
+ * Rückgabewert. Stattdessen werden Interfaces für Ergebnis- und Fehler-Callbacks als Parameter
+ * mitgegeben.
+ *
+ * @see OnSuccessListener Typisiertes Ergebnis-Callback.
+ * @see OnFailureListener Einheitliches Fehler-Callback.
  */
 public interface SurveyService {
 

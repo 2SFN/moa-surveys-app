@@ -7,7 +7,7 @@ import java.util.Random;
 /**
  * Klasse, die basierend auf dem HashCode eines Objektes eine Farbe aus einer vorgegebenen
  * Liste auswählt.
- *
+ * <p>
  * Angepasste Version, Quelle Original:
  * https://github.com/amulyakhare/TextDrawable/blob/master/library/src/main/java/com/amulyakhare/textdrawable/util/ColorGenerator.java
  *
@@ -41,14 +41,14 @@ public class ColorGenerator {
                 0xff9575cd,
                 0xff7986cb,
                 0xff64b5f6,
-               // 0xff4fc3f7, // auch Türkis
+                // 0xff4fc3f7, // auch Türkis
                 0xff4dd0e1, // Türkis
                 0xff4db6ac,
-               // 0xff81c784, leicht zu helles grün
+                // 0xff81c784, leicht zu helles grün
                 0xffff8a65,
-               // 0xffffb74d, Gelb zu hell
-               // 0xffa1887f, braun
-               // 0xff90a4ae, // Blau silber misch
+                // 0xffffb74d, Gelb zu hell
+                // 0xffa1887f, braun
+                // 0xff90a4ae, // Blau silber misch
                 0xff00655B,  // grün dunkel
                 0xffB7950B, // gelb dunkel
                 0xff28B463, // grün kräftig ++

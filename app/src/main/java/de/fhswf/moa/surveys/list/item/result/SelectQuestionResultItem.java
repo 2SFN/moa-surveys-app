@@ -6,7 +6,7 @@ import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 /**
  * List-Item Klasse für {@link SingleSelectQuestion} (und auch
  * {@link de.fhswf.moa.surveys.model.MultiSelectQuestion}) items.
- *
+ * <p>
  * Eine Unterscheidung ist nicht erforderlich, weil die Präsentation der Ergebnisse für
  * {@link SingleSelectQuestion} und die Spezialisierung gleich ist.
  */

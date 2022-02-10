@@ -19,6 +19,15 @@ import de.fhswf.moa.surveys.list.item.ListItem;
 import de.fhswf.moa.surveys.list.item.SurveyListItem;
 import de.fhswf.moa.surveys.model.Survey;
 
+/**
+ * Launcher-Activity der Anwendung.
+ * <p>
+ * Ruft eine Liste von verfügbaren Umfragen ab und zeigt diese an.
+ *
+ * @see SurveyService
+ * @see ListAdapter
+ * @see Survey
+ */
 public class MainActivity extends AppCompatActivity implements SurveyListItem.OnSurveyListener {
 
     private ArrayList<ListItem> items;
@@ -55,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements SurveyListItem.On
      * Initiiert das Abrufen von Umfragen.
      */
     private void refreshContent() {
-        if(!busy) {
+        if (!busy) {
             this.busy = true;
 
             surveyService.fetchSurveyList(
@@ -65,6 +74,12 @@ public class MainActivity extends AppCompatActivity implements SurveyListItem.On
         }
     }
 
+    /**
+     * Kapselt die erhaltenen Umfragen in {@link SurveyListItem} und fügt sie dem Adapter
+     * hinzu.
+     *
+     * @param result Ergebnis des Services.
+     */
     private void addSurveysToList(List<Survey> result) {
         this.busy = false;
         adapter.clear();
@@ -74,6 +89,14 @@ public class MainActivity extends AppCompatActivity implements SurveyListItem.On
         }
     }
 
+    /**
+     * Zeigt einen Fehler-Dialog an.
+     * <p>
+     * Da die Anwendung bei einem Service-Fehler nutzlos ist, gibt es entweder die Option, es
+     * direkt erneut zu versuchen, oder die App wird beendet.
+     *
+     * @param e Fehler-Details.
+     */
     private void showErrorDialog(Throwable e) {
         this.busy = false;
 
@@ -88,6 +111,14 @@ public class MainActivity extends AppCompatActivity implements SurveyListItem.On
                 .show();
     }
 
+    /**
+     * Aufgerufen, wenn der Nutzer eine Umfragen-Karte anklickt.
+     * <p>
+     * Erzeugt einen Intent mit der Survey-ID als Parameter, welcher die {@link QuestionActivity}
+     * startet.
+     *
+     * @param item Angeklicktes Survey-Item.
+     */
     @Override
     public void onSurveyClick(@NonNull SurveyListItem item) {
         Intent intent = new Intent(this, QuestionActivity.class);

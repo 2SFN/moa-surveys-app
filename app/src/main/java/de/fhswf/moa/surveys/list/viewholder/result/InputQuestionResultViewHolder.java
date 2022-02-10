@@ -13,6 +13,12 @@ import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.result.InputQuestionResultItem;
 import de.fhswf.moa.surveys.list.viewholder.ContainerCardBaseViewHolder;
 
+/**
+ * ViewHolder-Implementierung für {@link InputQuestionResultItem}.
+ * <p>
+ * Die Ergebnisse werden einzeln präsentiert und der Nutzer kann mit Vor- und Zurück-Buttons
+ * navigieren.
+ */
 public class InputQuestionResultViewHolder
         extends ContainerCardBaseViewHolder<InputQuestionResultItem> {
 
@@ -62,7 +68,7 @@ public class InputQuestionResultViewHolder
      * @param item Item.
      */
     private void updateContent(InputQuestionResultItem item) {
-        if(item.getQuestion().getResults() == null || item.getQuestion().getResults().size() == 0) {
+        if (item.getQuestion().getResults() == null || item.getQuestion().getResults().size() == 0) {
             resultText.setText(R.string.input_results_no_results);
             next.setVisibility(View.INVISIBLE);
             prev.setVisibility(View.INVISIBLE);
@@ -71,19 +77,19 @@ public class InputQuestionResultViewHolder
             resultText.setText(item.getQuestion().getResults().get(item.getResultPosition()));
             resultInfo.setText(String.format(Locale.getDefault(),
                     getContext().getString(R.string.input_results_info_label),
-                    (item.getResultPosition()+1), item.getQuestion().getResults().size()));
+                    (item.getResultPosition() + 1), item.getQuestion().getResults().size()));
 
             // Button-Sichtbarkeit abhängig von Position
-            if(item.getResultPosition() == 0) {
+            if (item.getResultPosition() == 0) {
                 // Genau 1 Ergebnis >> Gar keine Buttons anzeigen
-                if(item.getQuestion().getResults().size() == 1) {
+                if (item.getQuestion().getResults().size() == 1) {
                     next.setVisibility(View.INVISIBLE);
                 } else {
                     next.setVisibility(View.VISIBLE);
                 }
 
                 prev.setVisibility(View.INVISIBLE);
-            } else if(item.getResultPosition() == (item.getQuestion().getResults().size() - 1)) {
+            } else if (item.getResultPosition() == (item.getQuestion().getResults().size() - 1)) {
                 next.setVisibility(View.INVISIBLE);
                 prev.setVisibility(View.VISIBLE);
             } else {

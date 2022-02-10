@@ -10,12 +10,13 @@ import de.fhswf.moa.surveys.model.InputQuestion;
 
 /**
  * Wrapper Class für InputQuestion
+ *
  * @author Joey F.M. Esteves
  */
 public class InputQuestionListItem implements QuestionListItem, QuestionResultItem {
     public static final int TYPE = 3;
 
-    private InputQuestion question;
+    private final InputQuestion question;
     private String userInput;
 
     public InputQuestionListItem(InputQuestion question) {
@@ -24,6 +25,7 @@ public class InputQuestionListItem implements QuestionListItem, QuestionResultIt
 
     /**
      * Getter für InputQuestion
+     *
      * @return question
      */
     @Override
@@ -56,7 +58,7 @@ public class InputQuestionListItem implements QuestionListItem, QuestionResultIt
 		}
          */
 
-        if(userInput != null && !userInput.trim().isEmpty()) {
+        if (userInput != null && !userInput.trim().isEmpty()) {
             return new JSONObject()
                     .put("type", question.getType().getValue())
                     .put("id", question.getId())

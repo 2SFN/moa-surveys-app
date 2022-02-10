@@ -6,15 +6,19 @@ import androidx.annotation.Nullable;
 import de.fhswf.moa.surveys.list.item.ListItem;
 
 /**
- * Wrapper Class für EndQuestion
- *
- * @author Joey F.M. Esteves
+ * Wrapper Class für EndQuestion.
+ * <p>
+ * Im Gegensatz zu den anderen Karten, hält diese Klasse kein
+ * {@link de.fhswf.moa.surveys.model.Question}-Objekt.
  */
 public class EndQuestionListItem implements ListItem {
     public static final int TYPE = 7;
 
-    private @Nullable OnEndClickListener onEndListener;
-    private @Nullable OnResultsClickListener onResultsClickListener;
+    private @Nullable
+    OnEndClickListener onEndListener;
+
+    private @Nullable
+    OnResultsClickListener onResultsClickListener;
 
     //Konstruktor
     public EndQuestionListItem() {
@@ -22,6 +26,7 @@ public class EndQuestionListItem implements ListItem {
 
     /**
      * Getter Listener
+     *
      * @return onEndListener
      */
     @Nullable
@@ -31,6 +36,7 @@ public class EndQuestionListItem implements ListItem {
 
     /**
      * Setter Listener
+     *
      * @param onEndListener
      */
     public EndQuestionListItem setOnEndListener(
@@ -59,7 +65,7 @@ public class EndQuestionListItem implements ListItem {
      * Interface Listener für Umfrage-Beenden-Button auf EndQuestion Item.
      */
     public interface OnEndClickListener {
-        void onEndButtonClick(@NonNull EndQuestionListItem item );
+        void onEndButtonClick(@NonNull EndQuestionListItem item);
     }
 
     /**

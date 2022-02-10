@@ -15,6 +15,9 @@ import de.fhswf.moa.surveys.list.item.question.MultiQuestionListItem;
 import de.fhswf.moa.surveys.list.viewholder.ContainerCardBaseViewHolder;
 import de.fhswf.moa.surveys.model.MultiSelectQuestion;
 
+/**
+ *
+ */
 public class MultiQuestionViewHolder extends ContainerCardBaseViewHolder<MultiQuestionListItem> {
 
     public MultiQuestionViewHolder(@NonNull View itemView) {

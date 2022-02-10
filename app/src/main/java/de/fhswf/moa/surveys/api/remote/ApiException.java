@@ -1,5 +1,8 @@
 package de.fhswf.moa.surveys.api.remote;
 
+/**
+ * Exception-Klasse für API-Fehler.
+ */
 public class ApiException extends Exception {
 
     public ApiException() {

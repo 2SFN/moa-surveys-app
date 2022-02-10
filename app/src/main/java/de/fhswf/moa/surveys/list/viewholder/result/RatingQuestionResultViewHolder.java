@@ -13,6 +13,12 @@ import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.result.RatingQuestionResultItem;
 import de.fhswf.moa.surveys.list.viewholder.ContainerCardBaseViewHolder;
 
+/**
+ * ViewHolder-Implementierung für {@link RatingQuestionResultItem}.
+ * <p>
+ * Die Ergebnisse werden als einfache Liste erzeugt und mit einer {@link ProgressBar}
+ * anteilsmäßig präsentiert.
+ */
 public class RatingQuestionResultViewHolder
         extends ContainerCardBaseViewHolder<RatingQuestionResultItem> {
 
@@ -44,7 +50,7 @@ public class RatingQuestionResultViewHolder
                 R.layout.result_item, getContainer(), false);
 
         // Prozent berechnen
-        int percent = (int) ((value / ((float) max))*100);
+        int percent = (int) ((value / ((float) max)) * 100);
 
         // Werte setzen
         String text = String.format(Locale.getDefault(), getContext()

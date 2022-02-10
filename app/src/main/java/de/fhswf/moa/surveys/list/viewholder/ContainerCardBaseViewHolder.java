@@ -13,6 +13,19 @@ import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.QuestionListItem;
 import de.fhswf.moa.surveys.util.ColorGenerator;
 
+/**
+ * Spezifische Implementierung von {@link BaseViewHolder} für Umfrage-Karten mit Container.
+ * <p>
+ * Die Klasse verwaltet Typen, welche {@link QuestionListItem} implementieren, um auf die
+ * generelle {@link de.fhswf.moa.surveys.model.Question} zugreifen zu können.
+ * Hierdurch können allgemeine Felder wie Titel und Beschreibung einheitlich gesetzt werden.
+ * <p>
+ * Stellt außerdem Helfer-Methoden zum Füllen des Containers (s. {@link this#addContentView(View)})
+ * und Beschaffen des Contexts ({@link this#getContext()}) zur Verfügung.
+ *
+ * @param <T> Typ, der dargestellt werden kann.
+ * @see R.layout#question_item Zugrundeliegendes Layout.
+ */
 public abstract class ContainerCardBaseViewHolder<T extends QuestionListItem>
         extends BaseViewHolder<T> {
 
@@ -23,7 +36,7 @@ public abstract class ContainerCardBaseViewHolder<T extends QuestionListItem>
 
     /**
      * Erstelle eine neue ViewHolder-Instanz.
-     *
+     * <p>
      * Es wird das standard Question-Layout {@link R.layout#question_item} vorausgesetzt.
      *
      * @param itemView Layout.
@@ -37,6 +50,15 @@ public abstract class ContainerCardBaseViewHolder<T extends QuestionListItem>
         this.description = itemView.findViewById(R.id.description);
     }
 
+    /**
+     * Die Standard-Implementierung der bind-Methode generiert eine dynamische Hintergrund-Farbe
+     * für die Karte auf Basis der angezeigten {@link de.fhswf.moa.surveys.model.Question} und
+     * leert den Container.
+     * <p>
+     * Sie sollte deshalb im Regelfall immer als super aufgerufen werden.
+     *
+     * @param item Darzustellendes Item.
+     */
     @CallSuper
     @Override
     public void bind(T item) {

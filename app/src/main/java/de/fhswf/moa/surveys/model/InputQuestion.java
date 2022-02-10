@@ -37,7 +37,7 @@ public class InputQuestion extends Question {
     }
 
     public void setMaxLength(int maxLength) {
-        if(maxLength < 1)
+        if (maxLength < 1)
             throw new IllegalArgumentException("Maximum length must be positive and non-zero.");
 
         this.maxLength = maxLength;
@@ -54,7 +54,7 @@ public class InputQuestion extends Question {
 
     /**
      * Einfache Methode, mit der mehrere Ergebnisse hinzugefügt werden können.
-     *
+     * <p>
      * Verwendet beim Bauen der Strukturen in der
      * {@link de.fhswf.moa.surveys.api.service.MockSurveyService} Implementierung.
      *
@@ -62,7 +62,7 @@ public class InputQuestion extends Question {
      * @return Instance.
      */
     public InputQuestion addResults(@NonNull String... results) {
-        if(this.results == null)
+        if (this.results == null)
             this.results = new ArrayList<>();
 
         Collections.addAll(this.results, results);

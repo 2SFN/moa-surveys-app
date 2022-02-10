@@ -14,12 +14,13 @@ import de.fhswf.moa.surveys.model.MultiSelectQuestion;
 
 /**
  * Wrapper Class für MultiSelectQuestion
+ *
  * @author Joey F.M. Esteves
  */
-public class MultiQuestionListItem implements QuestionListItem, QuestionResultItem{
+public class MultiQuestionListItem implements QuestionListItem, QuestionResultItem {
     public static final int TYPE = 5;
 
-    private MultiSelectQuestion question;
+    private final MultiSelectQuestion question;
 
     private ArrayList<String> userInput;
 
@@ -29,6 +30,7 @@ public class MultiQuestionListItem implements QuestionListItem, QuestionResultIt
 
     /**
      * Getter MultiSelectQuestion
+     *
      * @return question
      */
     @Override
@@ -43,28 +45,24 @@ public class MultiQuestionListItem implements QuestionListItem, QuestionResultIt
 
     @NonNull
     public ArrayList<String> getUserInput() {
-        if(this.userInput == null)
+        if (this.userInput == null)
             userInput = new ArrayList<>();
 
         return userInput;
     }
 
-    public void setUserInput(ArrayList<String> userInput) {
-        this.userInput = userInput;
-    }
-
     @Nullable
     @Override
     public JSONObject getResult() throws JSONException {
-        if(userInput != null){
+        if (userInput != null) {
             JSONArray responses = new JSONArray();
-            for(String c : userInput) {
+            for (String c : userInput) {
                 responses.put(c);
             }
 
             return new JSONObject()
-                    .put("type",question.getType().getValue())
-                    .put("id",question.getId())
+                    .put("type", question.getType().getValue())
+                    .put("id", question.getId())
                     .put("response", responses);
         }
         return null;

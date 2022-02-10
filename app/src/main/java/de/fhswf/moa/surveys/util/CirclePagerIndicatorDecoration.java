@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Seiten-Indikator für das horizontale RecyclerView.
- *
+ * <p>
  * Quelle:
  * https://stackoverflow.com/a/48071124
  */
@@ -24,7 +24,7 @@ public class CirclePagerIndicatorDecoration extends RecyclerView.ItemDecoration 
     public static final int colorActive = 0x8A000000;
 
     @ColorInt
-    public static final int  colorInactive = 0xFFAFAFAF;
+    public static final int colorInactive = 0xFFAFAFAF;
 
     private static final float DP = Resources.getSystem().getDisplayMetrics().density;
 

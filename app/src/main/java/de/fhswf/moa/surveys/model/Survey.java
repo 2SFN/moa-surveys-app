@@ -79,7 +79,7 @@ public class Survey {
         if (this.questions == null)
             this.questions = new ArrayList<>();
 
-        if(!questions.contains(question))
+        if (!questions.contains(question))
             questions.add(question);
 
         return this;

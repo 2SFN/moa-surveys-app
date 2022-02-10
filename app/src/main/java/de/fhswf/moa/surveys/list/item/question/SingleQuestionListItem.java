@@ -12,12 +12,12 @@ import de.fhswf.moa.surveys.model.SingleSelectQuestion;
 /**
  * Wrapper Class für SingleSelectQuestion
  *
- * @author  Joey F.M. Esteves , Konzept SFN
+ * @author Joey F.M. Esteves , Konzept SFN
  */
 public class SingleQuestionListItem implements QuestionListItem, QuestionResultItem {
     public static final int TYPE = 4;
 
-    private SingleSelectQuestion question;
+    private final SingleSelectQuestion question;
 
     private String userInput;
 
@@ -27,6 +27,7 @@ public class SingleQuestionListItem implements QuestionListItem, QuestionResultI
 
     /**
      * Getter für SingleSelectQuestion
+     *
      * @return question
      */
     @Override
@@ -57,11 +58,11 @@ public class SingleQuestionListItem implements QuestionListItem, QuestionResultI
             "id": "Q-56ac01fc-e43e-4755-ab50-68de6f6f8564",
             respone:"Answer"
          */
-        if(userInput != null){
+        if (userInput != null) {
             return new JSONObject()
-                    .put("type",question.getType().getValue())
-                    .put("id",question.getId())
-                    .put("response",userInput);
+                    .put("type", question.getType().getValue())
+                    .put("id", question.getId())
+                    .put("response", userInput);
         }
         return null;
     }

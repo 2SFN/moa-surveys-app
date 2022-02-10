@@ -9,6 +9,13 @@ import de.fhswf.moa.surveys.R;
 import de.fhswf.moa.surveys.list.item.question.EndQuestionListItem;
 import de.fhswf.moa.surveys.list.viewholder.BaseViewHolder;
 
+/**
+ * ViewHolder für {@link EndQuestionListItem}.
+ *
+ * Im Gegensatz zu den üblichen Karten, verwendet dieser ViewHolder ein eigenes Layout.
+ *
+ * @see R.layout#survey_end Zugehöriges Layout.
+ */
 public class EndQuestionViewHolder extends BaseViewHolder<EndQuestionListItem> {
 
     private final ImageButton results;
@@ -24,12 +31,12 @@ public class EndQuestionViewHolder extends BaseViewHolder<EndQuestionListItem> {
     @Override
     public void bind(EndQuestionListItem item) {
         results.setOnClickListener(v -> {
-            if(item.getOnResultsClickListener() != null)
+            if (item.getOnResultsClickListener() != null)
                 item.getOnResultsClickListener().onResultsClick();
         });
 
         submit.setOnClickListener(v -> {
-            if(item.getOnEndListener() != null)
+            if (item.getOnEndListener() != null)
                 item.getOnEndListener().onEndButtonClick(item);
         });
     }

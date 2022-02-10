@@ -20,6 +20,17 @@ import de.fhswf.moa.surveys.list.item.question.InputQuestionListItem;
 import de.fhswf.moa.surveys.list.viewholder.ContainerCardBaseViewHolder;
 import de.fhswf.moa.surveys.util.DimensionsUtil;
 
+/**
+ * ViewHolder-Implementierung für {@link InputQuestionListItem}.
+ * <p>
+ * Erzeugt für den Inhalt ein Eingabefeld.
+ * <p>
+ * Außerdem wird ein Counter für die Anzahl von Zeichen erzeugt, welche den Nutzer auch warnt,
+ * sobald das Zeichen-Limit der jeweiligen Frage überschritten ist
+ * (s. {@link this#updateCounter(TextView, int, int)}).
+ *
+ * @see InputQuestionListItem#setUserInput(String) Festhalten der Nutzer-Eingaben.
+ */
 public class InputQuestionViewHolder extends ContainerCardBaseViewHolder<InputQuestionListItem> {
 
     public InputQuestionViewHolder(@NonNull View itemView) {
@@ -58,7 +69,7 @@ public class InputQuestionViewHolder extends ContainerCardBaseViewHolder<InputQu
                 editTextPadding, editTextPadding, editTextPadding, editTextPadding);
         textInputEditText.setHint(R.string.input_question_hint);
 
-        // ChangedListener
+        // ChangedListener für den Counter
         textInputEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -75,10 +86,21 @@ public class InputQuestionViewHolder extends ContainerCardBaseViewHolder<InputQu
             }
         });
 
+        // Views dem Container hinzufügen
         addContentView(textInputEditText);
         addContentView(counter);
     }
 
+    /**
+     * Aktualisiert den Zeichen-Zähler.
+     * <p>
+     * Bei Überschreitung des Limits wird das Counter-Label fett dargestellt, und es wird ein
+     * Warn-Icon als CompoundDrawable angezeigt.
+     *
+     * @param counter Zähler TextView.
+     * @param current Aktuelle Zeichen-Anzahl.
+     * @param max     Maximal zulässige Zeichen-Anzahl.
+     */
     private void updateCounter(TextView counter, int current, int max) {
         // Counter aktualisieren
         String label = String.format(Locale.getDefault(), "%d / %d", current, max);
@@ -88,7 +110,7 @@ public class InputQuestionViewHolder extends ContainerCardBaseViewHolder<InputQu
         if (current > max) {
             counter.setTypeface(null, Typeface.BOLD);
 
-            if(counter.getTag() == null) {
+            if (counter.getTag() == null) {
                 // Warn-Icon
                 counter.setCompoundDrawablesRelativeWithIntrinsicBounds(
                         0, 0, R.drawable.ic_warning_tiny, 0);
@@ -99,7 +121,7 @@ public class InputQuestionViewHolder extends ContainerCardBaseViewHolder<InputQu
         } else {
             counter.setTypeface(null, Typeface.NORMAL);
 
-            if(counter.getTag() != null) {
+            if (counter.getTag() != null) {
                 counter.setCompoundDrawables(null, null, null, null);
                 counter.setTag(null);
             }

@@ -187,7 +187,11 @@ public class QuestionActivity extends AppCompatActivity implements
     @Override
     public void onEndButtonClick(@NonNull EndQuestionListItem item) {
         try {
-            // I. Ergebnisse übermitteln
+            // Lock setzen (damit der Button nicht mehrmals geklickt werden kann)
+            if(busy) return;
+            this.busy = true;
+
+            // Ergebnisse übermitteln
             JSONArray results = new JSONArray();
 
             for (ListItem c : adapter.getItems()) {
@@ -226,6 +230,8 @@ public class QuestionActivity extends AppCompatActivity implements
      * (zurück navigieren führt dann wieder zu der Startseite/{@link MainActivity}).
      */
     private void openResults() {
+        this.busy = false;
+
         Intent intent = new Intent(this, ResultActivity.class);
         intent.putExtra(ResultActivity.EXTRA_SURVEY_ID, surveyID);
         startActivity(intent);
